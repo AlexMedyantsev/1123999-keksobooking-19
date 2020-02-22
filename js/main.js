@@ -11,11 +11,11 @@ var AD_AMOUNT = 8;
 
 var getRandomInteger = function (min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
-}
+};
 
 var getRandomStringFromArray = function (array) {
   return array[getRandomInteger(0, array.length - 1)];
-}
+};
 
 var generateArrayOfStrings = function (data) {
   var resultArrayLength = getRandomInteger(1, data.length);
@@ -26,43 +26,43 @@ var generateArrayOfStrings = function (data) {
   for (var i = 0; i < resultArrayLength; i++) {
     resultArray[i] = shuffledArray[i];
   }
-}
+};
 
 var shuffleArray = function (array) {
   return array.sort(function(a, b) {
     return 0,5 - Math.random();
   });
-}
+};
 
 var generateAd = function (amount) {
   var ad = [];
   for (var i = 0; i < amount; i++) {
-    var location = { x: getRandomInteger(0, 1200), y: getRandomInteger(130, 630) };
+    var location = {x: getRandomInteger(0, 1200), y: getRandomInteger(130, 630)};
     ad[i] = {
-      "author": {
-        "avatar": 'img/avatars/user0' + (i + 1) + '.png'
-    },
+      'author': {
+        'avatar': 'img/avatars/user0' + (i + 1) + '.png'
+      },
 
-    "offer": {
-      "title": getRandomStringFromArray(OFFER_TITLES),
-      "address":  location.x + ',' + location.y ,
-      "price": getRandomInteger(100, 2000),
-      "type": getRandomStringFromArray(OFFER_TYPES),
-      "rooms": getRandomInteger(1, 5),
-      "guests": getRandomInteger(1, 5),
-      "checkin": getRandomStringFromArray(OFFER_CHECKINS),
-      "checkout": getRandomStringFromArray(OFFER_CHECKOUTS),
-      "features": generateArrayOfStrings(OFFER_FEATURES),
-      "description": getRandomStringFromArray(OFFER_DESCRIPTIONS),
-      "photos": generateArrayOfStrings(OFFER_PHOTOS),
-    },
+      'offer': {
+        'title': getRandomStringFromArray(OFFER_TITLES),
+        'address':  location.x + ',' + location.y ,
+        'price': getRandomInteger(100, 2000),
+        'type': getRandomStringFromArray(OFFER_TYPES),
+        'rooms': getRandomInteger(1, 5),
+        'guests': getRandomInteger(1, 5),
+        'checkin': getRandomStringFromArray(OFFER_CHECKINS),
+        'checkout': getRandomStringFromArray(OFFER_CHECKOUTS),
+        'features': generateArrayOfStrings(OFFER_FEATURES),
+        'description': getRandomStringFromArray(OFFER_DESCRIPTIONS),
+        'photos': generateArrayOfStrings(OFFER_PHOTOS),
+      },
 
-    "location": {
-      "x": location.x,
-      "y": location.y
+      'location': {
+        'x': location.x,
+        'y': location.y
+      }
     }
   }
-}
   return ad;
 };
 
@@ -76,7 +76,7 @@ var generatePin = function (pin) {
   pinElement.querySelector('img').src = pin.author.avatar;
   pinElement.querySelector('img').alt = pin.offer.title;
   return pinElement;
-}
+};
 
 var generatedAd = generateAd(AD_AMOUNT);
 var fragment = document.createDocumentFragment();
