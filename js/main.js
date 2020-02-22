@@ -29,8 +29,8 @@ var generateArrayOfStrings = function (data) {
 };
 
 var shuffleArray = function (array) {
-  return array.sort(function(a, b) {
-    return 0,5 - Math.random();
+  return array.sort(function () {
+    return 0.5 - Math.random();
   });
 };
 
@@ -45,7 +45,7 @@ var generateAd = function (amount) {
 
       'offer': {
         'title': getRandomStringFromArray(OFFER_TITLES),
-        'address':  location.x + ',' + location.y ,
+        'address': location.x + ',' + location.y ,
         'price': getRandomInteger(100, 2000),
         'type': getRandomStringFromArray(OFFER_TYPES),
         'rooms': getRandomInteger(1, 5),
@@ -54,14 +54,14 @@ var generateAd = function (amount) {
         'checkout': getRandomStringFromArray(OFFER_CHECKOUTS),
         'features': generateArrayOfStrings(OFFER_FEATURES),
         'description': getRandomStringFromArray(OFFER_DESCRIPTIONS),
-        'photos': generateArrayOfStrings(OFFER_PHOTOS),
+        'photos': generateArrayOfStrings(OFFER_PHOTOS)
       },
 
       'location': {
         'x': location.x,
         'y': location.y
       }
-    }
+    };
   }
   return ad;
 };
