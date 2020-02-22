@@ -45,7 +45,7 @@ var generateAd = function (amount) {
 
       'offer': {
         'title': getRandomStringFromArray(OFFER_TITLES),
-        'address': location.x + ',' + location.y ,
+        'address': location.x + ',' + location.y,
         'price': getRandomInteger(100, 2000),
         'type': getRandomStringFromArray(OFFER_TYPES),
         'rooms': getRandomInteger(1, 5),
