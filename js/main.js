@@ -17,11 +17,11 @@ var getRandomStringFromArray = function (array) {
   return array[getRandomInteger(0, array.length - 1)];
 };
 
-var generateArrayOfStrings = function (data) {
-  var resultArrayLength = getRandomInteger(1, data.length);
+var generateArrayOfStrings = function (array) {
+  var resultArrayLength = getRandomInteger(1, array.length);
   var resultArray = [];
 
-  var shuffledArray = shuffleArray(data);
+  var shuffledArray = shuffleArray(array);
 
   for (var i = 0; i < resultArrayLength; i++) {
     resultArray[i] = shuffledArray[i];
