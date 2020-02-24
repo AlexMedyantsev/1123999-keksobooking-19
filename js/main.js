@@ -90,7 +90,7 @@ var renderAllMapPins = function () {
   }
 
   MAP.appendChild(fragment);
-}
+};
 
 renderAllMapPins();
 
@@ -108,15 +108,16 @@ var getRoomsAndGuests = function (ad) {
   var roomsAndGuests = '';
 
   if (ad.offer.rooms && ad.offer.guests) {
-    roomsAndGuests = ad.offer.rooms + 'комнаты для' +  ad.offer.guests + 'гостей';
+    roomsAndGuests = ad.offer.rooms + ' комнаты для ' + ad.offer.guests + ' гостей';
   }
-}
+  return roomsAndGuests;
+};
 
 var getCheckinAndCheckoutTime = function (ad) {
   var checkinAndCheckoutTime = '';
 
   if (ad.offer.checkin && ad.offer.checkout) {
-    checkinAndCheckoutTime = 'Заезд после' + ad.offer.checkin + ', выезд до' + ad.offer.checkout;
+    checkinAndCheckoutTime = 'Заезд после ' + ad.offer.checkin + ', выезд до ' + ad.offer.checkout;
   }
   return checkinAndCheckoutTime;
 };
@@ -127,9 +128,9 @@ var hideEmptyTextElement = function (element, elementText) {
   } else {
     element.classList.add('hidden');
   }
-}
+};
 
-var renderOneMapCard = function(ad) {
+var renderOneMapCard = function (ad) {
   var mapCardTemplate = document.querySelector('#card').content.querySelector('.map__card');
   var mapCardElement = mapCardTemplate.cloneNode(true);
 
@@ -143,7 +144,7 @@ var renderOneMapCard = function(ad) {
   var featureTemplate = mapCardFeatures.querySelector('li');
   var mapCardDescription = mapCardElement.querySelector('.popup__description');
   var mapCardPhotos = mapCardElement.querySelector('.popup__photos');
-  var photoTemplate = mapCardPhotos.querySelector('img')
+  var photoTemplate = mapCardPhotos.querySelector('img');
   var mapCardAvatar = mapCardElement.querySelector('.popup__avatar');
 
   hideEmptyTextElement(mapCardTitle, ad.offer.title);
@@ -169,9 +170,9 @@ var renderOneMapCard = function(ad) {
 
   if (ad.offer.photos.length > 0) {
     mapCardPhotos.innerHTML = '';
-    for (var i = 0; i < ad.offer.photos.length; i++) {
+    for (var j = 0; j < ad.offer.photos.length; j++) {
       var photoElement = photoTemplate.cloneNode(false);
-      photoElement.setAttribute('src', ad.offer.photos[i]);
+      photoElement.setAttribute('src', ad.offer.photos[j]);
       mapCardPhotos.appendChild(photoElement);
     }
   } else {
@@ -179,16 +180,14 @@ var renderOneMapCard = function(ad) {
   }
 
   if (ad.author.avatar) {
-    mapCardAvatar.setAttribute('src', ad.author.avatar)
+    mapCardAvatar.setAttribute('src', ad.author.avatar);
   } else {
     mapCardAvatar.classList.add('hidden');
   }
 
   return mapCardElement;
-}
+};
 
 renderOneMapCard(generatedAd[0]);
 
 MAP.appendChild(renderOneMapCard(generatedAd[0]));
-
-renderAllMapPins();
