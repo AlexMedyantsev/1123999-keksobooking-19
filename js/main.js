@@ -8,6 +8,7 @@ var OFFER_FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'co
 var OFFER_DESCRIPTIONS = ['A comfortable space that can accommodate up to 2 people. This apartment is 3mins from Shinjuku by train and also close to Shibuya ! It is a 6-minute walk from the nearest station of the apartment.The apartment is in a residential area so you can sleep peacefully and sleep at night.', 'We have permission for business as hotel, Japan visitors can legally stay* >3 metro stations nearby take you directly to the best Tokyo spots >Bus to Tokyo airports (Tokyo City Air Terminal) is a short walk distance >Neighborhood has traditional shops, pubs, restaurants for true local experience >Grocery&drug stores, ¥100 shops nearby to fill your shopping needs >Ideal for short stay, but we have had many satisfied long-term guests >Checkin until 12am, convenient in case of arrival by late flight', 'Tateishi Tokyo,Quaint Neighborhood around the Station. Many Bars still exist since right after the World War near the station. You can feel what Tokyo was like back in 1940s. Good access to Major spot (15mins-50mins )'];
 var OFFER_PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
 var AD_AMOUNT = 8;
+var MAP = document.querySelector('.map');
 
 var getRandomInteger = function (min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
@@ -15,6 +16,12 @@ var getRandomInteger = function (min, max) {
 
 var getRandomStringFromArray = function (array) {
   return array[getRandomInteger(0, array.length - 1)];
+};
+
+var shuffleArray = function (array) {
+  return array.sort(function () {
+    return 0.5 - Math.random();
+  });
 };
 
 var generateArrayOfStrings = function (array) {
@@ -26,12 +33,7 @@ var generateArrayOfStrings = function (array) {
   for (var i = 0; i < resultArrayLength; i++) {
     resultArray[i] = shuffledArray[i];
   }
-};
-
-var shuffleArray = function (array) {
-  return array.sort(function () {
-    return 0.5 - Math.random();
-  });
+  return resultArray;
 };
 
 var generateAd = function (amount) {
@@ -66,26 +68,127 @@ var generateAd = function (amount) {
   return ad;
 };
 
-var MAP = document.querySelector('.map');
+var generateMapPin = function (ad) {
+  var mapPinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
+  var mapPinElement = mapPinTemplate.cloneNode(true);
 
-var generatePin = function (pin) {
-  var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
-  var pinElement = pinTemplate.cloneNode(true);
-  pinElement.style.left = pin.location.x - 25 + 'px';
-  pinElement.style.top = pin.location.y - 70 + 'px';
-  pinElement.querySelector('img').src = pin.author.avatar;
-  pinElement.querySelector('img').alt = pin.offer.title;
-  return pinElement;
+  mapPinElement.style.left = ad.location.x - 25 + 'px';
+  mapPinElement.style.top = ad.location.y - 70 + 'px';
+  mapPinElement.querySelector('img').src = ad.author.avatar;
+  mapPinElement.querySelector('img').alt = ad.offer.title;
+
+  return mapPinElement;
 };
 
 var generatedAd = generateAd(AD_AMOUNT);
-var fragment = document.createDocumentFragment();
 
+var renderAllMapPins = function () {
+  var fragment = document.createDocumentFragment();
 
-for (var i = 0; i < AD_AMOUNT; i++) {
-  fragment.appendChild(generatePin(generatedAd[i]));
+  for (var i = 0; i < AD_AMOUNT; i++) {
+    fragment.appendChild(generateMapPin(generatedAd[i]));
+  }
+
+  MAP.appendChild(fragment);
 }
 
-MAP.appendChild(fragment);
+renderAllMapPins();
+
+var getAdType = function (ad) {
+  switch (ad.offer.type) {
+    case 'flat': return 'Квартира';
+    case 'bungalo': return 'Бунгало';
+    case 'house': return 'Дом';
+    case 'palace': return 'Дворец';
+  }
+  return ad.offer.type;
+};
+
+var getRoomsAndGuests = function (ad) {
+  var roomsAndGuests = '';
+
+  if (ad.offer.rooms && ad.offer.guests) {
+    roomsAndGuests = ad.offer.rooms + 'комнаты для' +  ad.offer.guests + 'гостей';
+  }
+}
+
+var getCheckinAndCheckoutTime = function (ad) {
+  var checkinAndCheckoutTime = '';
+
+  if (ad.offer.checkin && ad.offer.checkout) {
+    checkinAndCheckoutTime = 'Заезд после' + ad.offer.checkin + ', выезд до' + ad.offer.checkout;
+  }
+  return checkinAndCheckoutTime;
+};
+
+var hideEmptyTextElement = function (element, elementText) {
+  if (elementText) {
+    element.textContent = elementText;
+  } else {
+    element.classList.add('hidden');
+  }
+}
+
+var renderOneMapCard = function(ad) {
+  var mapCardTemplate = document.querySelector('#card').content.querySelector('.map__card');
+  var mapCardElement = mapCardTemplate.cloneNode(true);
+
+  var mapCardTitle = mapCardElement.querySelector('.popup__title');
+  var mapCardAddress = mapCardElement.querySelector('.popup__text--address');
+  var mapCardPrice = mapCardElement.querySelector('.popup__text--price');
+  var mapCardType = mapCardElement.querySelector('.popup__type');
+  var mapCardRoomsAndGuests = mapCardElement.querySelector('.popup__text--capacity');
+  var mapCardCheckinAndCheckouts = mapCardElement.querySelector('.popup__text--time');
+  var mapCardFeatures = mapCardElement.querySelector('.popup__features');
+  var featureTemplate = mapCardFeatures.querySelector('li');
+  var mapCardDescription = mapCardElement.querySelector('.popup__description');
+  var mapCardPhotos = mapCardElement.querySelector('.popup__photos');
+  var photoTemplate = mapCardPhotos.querySelector('img')
+  var mapCardAvatar = mapCardElement.querySelector('.popup__avatar');
+
+  hideEmptyTextElement(mapCardTitle, ad.offer.title);
+  hideEmptyTextElement(mapCardAddress, ad.offer.address);
+  hideEmptyTextElement(mapCardPrice, ad.offer.price);
+  hideEmptyTextElement(mapCardType, getAdType(ad));
+  hideEmptyTextElement(mapCardRoomsAndGuests, getRoomsAndGuests(ad));
+  hideEmptyTextElement(mapCardCheckinAndCheckouts, getCheckinAndCheckoutTime(ad));
+
+  if (ad.offer.features.length > 0) {
+    mapCardFeatures.innerHTML = '';
+    for (var i = 0; i < ad.offer.features.length; i++) {
+      var featureElement = featureTemplate.cloneNode(false);
+      featureElement.className = 'popup__feature popup__feature--' + ad.offer.features[i];
+      mapCardFeatures.appendChild(featureElement);
+    }
+  } else {
+    mapCardFeatures.classList.add('hidden');
+  }
+
+  hideEmptyTextElement(mapCardDescription, ad.offer.description);
 
 
+  if (ad.offer.photos.length > 0) {
+    mapCardPhotos.innerHTML = '';
+    for (var i = 0; i < ad.offer.photos.length; i++) {
+      var photoElement = photoTemplate.cloneNode(false);
+      photoElement.setAttribute('src', ad.offer.photos[i]);
+      mapCardPhotos.appendChild(photoElement);
+    }
+  } else {
+    mapCardPhotos.classList.add('hidden');
+  }
+
+  if (ad.author.avatar) {
+    mapCardAvatar.setAttribute('src', ad.author.avatar)
+  } else {
+    mapCardAvatar.classList.add('hidden');
+  }
+
+  return mapCardElement;
+}
+
+renderOneMapCard(generatedAd[0]);
+
+MAP.appendChild(renderOneMapCard(generatedAd[0]));
+
+renderAllMapPins();
