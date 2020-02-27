@@ -236,11 +236,11 @@ var getElementLocation = function (element) {
 };
 
 
-var getLocationForSharpPinEnd = function (sharpPin) {
+var getPinMiddleBottomPosition = function (sharpPin) {
   var sharpPinLocationCoordinates = {
     'location': {
-      'x': parseInt(sharpPin.offsetLeft - 25 + (sharpPin.clientWidth / 2), 10),
-      'y': parseInt(sharpPin.offsetTop - 70 + (sharpPin.clientHeight / 2), 10)
+      'x': parseInt(sharpPin.offsetLeft + (sharpPin.clientWidth / 2), 10),
+      'y': parseInt(sharpPin.offsetTop - (sharpPin.clientHeight), 10)
     }
   };
 
@@ -249,7 +249,7 @@ var getLocationForSharpPinEnd = function (sharpPin) {
 
 var inputAddress = adForm.querySelector('#address');
 var mainMapPinLocation = getElementLocation(mainMapPin);
-var sharpPinLocation = getLocationForSharpPinEnd(mainMapPin);
+var sharpPinLocation = getPinMiddleBottomPosition(mainMapPin);
 
 var writeLocationInInput = function (elementLocation, input) {
   input.value = elementLocation.location.x + ', ' + elementLocation.location.y;
