@@ -10,7 +10,7 @@ var OFFER_PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http:
 var AD_AMOUNT = 8;
 var MAP = document.querySelector('.map');
 // var PIN_WIDTH = 65;
-var PIN_HEIGHT = 65;
+// var PIN_HEIGHT = 65;
 
 
 var getRandomInteger = function (min, max) {
@@ -224,21 +224,39 @@ var fadeInForm = function () {
 disableForm(mapFiltersForm);
 disableForm(adForm);
 
-// var getLocation = function (inputElement) {
-//   var coordinates = inputElement.getBoundingClientRect();
-//   return coordinates;
-// }
+var getElementLocation = function (element) {
+  var locationCoordinates = {
+    'location': {
+      'x': parseInt(element.offsetLeft + (element.clientWidth / 2), 10),
+      'y': parseInt(element.offsetTop + (element.clientHeight / 2), 10)
+    }
+  };
 
-// var writeLocation = function (coordinates) {
-//   inputElement.value = Math.floor(coordinates.left - 25) + ',' + Math.floor(coordinates.top - 70);
-// }
+  return locationCoordinates;
+};
 
-// writeLocation(getLocation(mainMapPin));
 
-var MAP_WIDTH = MAP.offsetWidth;
-var MAP_HEIGHT = MAP.offsetHeight;
+var getLocationForSharpPinEnd = function (sharpPin) {
+  var sharpPinLocationCoordinates = {
+    'location': {
+      'x': parseInt(sharpPin.offsetLeft - 25 + (sharpPin.clientWidth / 2), 10),
+      'y': parseInt(sharpPin.offsetTop - 70 + (sharpPin.clientHeight / 2), 10)
+    }
+  };
+
+  return sharpPinLocationCoordinates;
+};
+
 var inputAddress = adForm.querySelector('#address');
-inputAddress.value = (Math.floor(MAP_WIDTH / 2)) + ', ' + (Math.floor(MAP_HEIGHT / 2));
+var mainMapPinLocation = getElementLocation(mainMapPin);
+var sharpPinLocation = getLocationForSharpPinEnd(mainMapPin);
+
+var writeLocationInInput = function (elementLocation, input) {
+  input.value = elementLocation.location.x + ', ' + elementLocation.location.y;
+};
+
+
+writeLocationInInput(mainMapPinLocation, inputAddress);
 
 var activatePage = function () {
   generateOneMapCard(generatedAd[0]);
@@ -247,7 +265,8 @@ var activatePage = function () {
   enableForm(mapFiltersForm);
   fadeInMap();
   fadeInForm();
-  inputAddress.value = (Math.floor(MAP_WIDTH / 2)) + ', ' + (Math.floor(MAP_HEIGHT / 2 - PIN_HEIGHT));
+  writeLocationInInput(sharpPinLocation, inputAddress);
+  // inputAddress.value = (Math.floor(MAP_WIDTH / 2)) + ', ' + (Math.floor(MAP_HEIGHT / 2 - PIN_HEIGHT));
   renderAllMapPins();
 };
 
