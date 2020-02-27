@@ -240,7 +240,7 @@ var getPinMiddleBottomPosition = function (sharpPin) {
   var sharpPinLocationCoordinates = {
     'location': {
       'x': parseInt(sharpPin.offsetLeft + (sharpPin.clientWidth / 2), 10),
-      'y': parseInt(sharpPin.offsetTop - (sharpPin.clientHeight), 10)
+      'y': parseInt(sharpPin.offsetTop + (sharpPin.clientHeight), 10)
     }
   };
 
