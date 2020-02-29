@@ -9,6 +9,8 @@ var OFFER_DESCRIPTIONS = ['A comfortable space that can accommodate up to 2 peop
 var OFFER_PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
 var AD_AMOUNT = 8;
 var MAP = document.querySelector('.map');
+var mapPins = MAP.querySelector('.map__pins');
+
 // var PIN_WIDTH = 65;
 // var PIN_HEIGHT = 65;
 
@@ -275,7 +277,7 @@ writeLocationInInput(mainMapPinLocation, inputAddress);
 var renderMapCard = function (card) {
   card.classList.remove('hidden');
   card.classList.add('map__pin--active');
-  MAP.appendChild(card);
+  mapPins.appendChild(card);
 };
 
 var activatePage = function () {
@@ -354,7 +356,6 @@ checkOutSelect.addEventListener('change', function () {
 
 // Модуль 4. Часть 2
 
-var mapPins = document.querySelector('.map__pins');
 
 var setInputRequired = function (input) {
   input.setAttribute('required', 'required');
