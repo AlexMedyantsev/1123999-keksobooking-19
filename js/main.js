@@ -90,7 +90,7 @@ var renderAllMapPins = function () {
 
   for (var i = 0; i < AD_AMOUNT; i++) {
     var pin = generateMapPin(generatedAd[i]);
-    setPinHandlers (pin, i);
+    setPinHandlers(pin, i);
     fragment.appendChild(pin);
   }
 
@@ -98,10 +98,10 @@ var renderAllMapPins = function () {
 };
 
 var setPinHandlers = function (pin, index) {
-  pin.addEventListener('click', function(evt) {
+  pin.addEventListener('click', function () {
     openCard(index);
   });
-  pin.addEventListener('keydown', function(evt) {
+  pin.addEventListener('keydown', function (evt) {
     if (evt.keyCode === 13) {
       openCard(index);
     }
@@ -275,9 +275,7 @@ writeLocationInInput(mainMapPinLocation, inputAddress);
 var renderMapCard = function (card) {
   card.classList.remove('hidden');
   MAP.appendChild(card);
-}
-
-
+};
 
 var activatePage = function () {
   enableForm(adForm);
@@ -289,7 +287,7 @@ var activatePage = function () {
   renderAllMapPins();
 };
 
-var titleInput = adForm.querySelector('#title')
+var titleInput = adForm.querySelector('#title');
 var roomNumberInput = adForm.querySelector('#room_number');
 var capacityInput = adForm.querySelector('#capacity');
 var priceInput = adForm.querySelector('#price');
@@ -319,7 +317,7 @@ var validateRoomAndGuestsSelects = function () {
   } else {
     roomNumberInput.setCustomValidity('');
   }
-}
+};
 
 validateRoomAndGuestsSelects();
 
@@ -355,7 +353,7 @@ checkOutSelect.addEventListener('change', function () {
 
 // Модуль 4. Часть 2
 
-var mapPinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
+// var mapPinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
 
 var setInputRequired = function (input) {
   input.setAttribute('required', 'required');
@@ -386,7 +384,7 @@ validatePriceInput(priceInput);
 
 var makeInputReadOnly = function (input) {
   input.setAttribute('readonly', true);
-}
+};
 
 makeInputReadOnly(addressInput);
 
@@ -404,12 +402,12 @@ var syncPlaceTypeAndMinPrice = function (place, price) {
     price.setAttribute('min', 10000);
     price.setAttribute('placeholder', 10000);
   }
-}
+};
 
-syncPlaceTypeAndMinPrice(placeInput, priceInput)
+syncPlaceTypeAndMinPrice(placeInput, priceInput);
 
 var syncCheckinAndCheckout = function (firstSelect, secondSelect) {
-   switch(firstSelect.value) {
+  switch (firstSelect.value) {
     case '12:00' :
       secondSelect.value = '12:00';
       break;
@@ -419,8 +417,8 @@ var syncCheckinAndCheckout = function (firstSelect, secondSelect) {
     case '14:00' :
       secondSelect.value = '14:00';
       break;
-   }
-}
+  }
+};
 
 syncCheckinAndCheckout(checkInSelect, checkOutSelect);
 
@@ -428,12 +426,12 @@ var openCard = function (index) {
   var mapCard = generateOneMapCard(generatedAd[index]);
   removeRenderedCard();
   renderMapCard(mapCard);
-  var closeButton = mapCard.querySelector('.popup_close');
+  // var closeButton = mapCard.querySelector('.popup_close');
   mapCard.addEventListener('click', removeRenderedCard);
   document.addEventListener('keydown', function (evt) {
     if (evt.keyCode === 27) {
-       removeRenderedCard();
-     }
+      removeRenderedCard();
+    }
   });
 };
 
@@ -442,5 +440,5 @@ var removeRenderedCard = function () {
   if (mapCard) {
     mapCard.remove();
   }
-}
+};
 
