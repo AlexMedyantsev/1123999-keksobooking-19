@@ -274,6 +274,7 @@ writeLocationInInput(mainMapPinLocation, inputAddress);
 
 var renderMapCard = function (card) {
   card.classList.remove('hidden');
+  card.classList.add('map__pin--active');
   MAP.appendChild(card);
 };
 
