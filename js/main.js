@@ -317,6 +317,8 @@ var validateRoomAndGuestsSelects = function () {
   var guests = parseInt(capacityInput.value, 10);
   if (guests > rooms) {
     roomNumberInput.setCustomValidity('Нужно больше комнат');
+  } else if (roomNumberInput.value === '100') {
+    capacityInput.value = '0';
   } else {
     roomNumberInput.setCustomValidity('');
   }
