@@ -94,7 +94,7 @@ var renderAllMapPins = function () {
     fragment.appendChild(pin);
   }
 
-  MAP.appendChild(fragment);
+  mapPins.appendChild(fragment);
 };
 
 var setPinHandlers = function (pin, index) {
@@ -353,7 +353,7 @@ checkOutSelect.addEventListener('change', function () {
 
 // Модуль 4. Часть 2
 
-// var mapPinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
+var mapPins = document.querySelector('.map__pins');
 
 var setInputRequired = function (input) {
   input.setAttribute('required', 'required');
