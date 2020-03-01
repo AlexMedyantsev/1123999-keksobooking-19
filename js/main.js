@@ -99,17 +99,6 @@ var renderAllMapPins = function () {
   mapPins.appendChild(fragment);
 };
 
-var setPinHandlers = function (pin, index) {
-  pin.addEventListener('click', function () {
-    openCard(index);
-  });
-  pin.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === 13) {
-      openCard(index);
-    }
-  });
-};
-
 var getAdType = function (ad) {
   switch (ad.offer.type) {
     case 'flat': return 'Квартира';
@@ -276,7 +265,6 @@ writeLocationInInput(mainMapPinLocation, inputAddress);
 
 var renderMapCard = function (card) {
   card.classList.remove('hidden');
-  card.classList.add('map__pin--active');
   mapPins.appendChild(card);
 };
 
@@ -286,7 +274,6 @@ var activatePage = function () {
   fadeInMap();
   fadeInForm();
   writeLocationInInput(sharpPinLocation, inputAddress);
-  // inputAddress.value = (Math.floor(MAP_WIDTH / 2)) + ', ' + (Math.floor(MAP_HEIGHT / 2 - PIN_HEIGHT));
   renderAllMapPins();
 };
 
@@ -355,9 +342,7 @@ checkOutSelect.addEventListener('change', function () {
   syncCheckinAndCheckout(checkOutSelect, checkInSelect);
 });
 
-
 // Модуль 4. Часть 2
-
 
 var setInputRequired = function (input) {
   input.setAttribute('required', 'required');
@@ -379,6 +364,7 @@ validateTitleInput(titleInput);
 
 
 var validatePriceInput = function (price) {
+  setInputRequired(price);
   if (parseInt(price.value, 10) > 1000000) {
     priceInput.setCustomValidity('Маскимальная цена 1.000.000 Рублей');
   }
@@ -446,3 +432,18 @@ var removeRenderedCard = function () {
   }
 };
 
+// var mapPin = document.querySelector('#pin').content.querySelectorAll('.map__pin');
+
+var setPinHandlers = function (pin, index) {
+  pin.addEventListener('click', function () {
+    var mapPin = document.querySelectorAll('.map__pin');
+    mapPin.classList.remove('map__pin--active');
+    // pin.classList.add('map__pin--active');
+    openCard(index);
+  });
+  pin.addEventListener('keydown', function (evt) {
+    if (evt.keyCode === 13) {
+      openCard(index);
+    }
+  });
+};
