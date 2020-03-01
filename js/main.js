@@ -302,12 +302,18 @@ mainMapPin.addEventListener('keydown', function (evt) {
 var validateRoomAndGuestsSelects = function () {
   var rooms = parseInt(roomNumberInput.value, 10);
   var guests = parseInt(capacityInput.value, 10);
-  if (guests > rooms) {
+  if (guests && rooms === 100) {
+    roomNumberInput.setCustomValidity('какое-то сообщение');
+    capacityInput.setCustomValidity('');
+  } else if (guests === 0 && rooms !== 100) {
+    capacityInput.setCustomValidity('какое-то сообщение (2)');
+    roomNumberInput.setCustomValidity('');
+  } else if (guests > rooms) {
     roomNumberInput.setCustomValidity('Нужно больше комнат');
-  } else if (roomNumberInput.value === '100') {
-    capacityInput.value = '0';
+    capacityInput.setCustomValidity('');
   } else {
     roomNumberInput.setCustomValidity('');
+    capacityInput.setCustomValidity('');
   }
 };
 
@@ -436,9 +442,11 @@ var removeRenderedCard = function () {
 
 var setPinHandlers = function (pin, index) {
   pin.addEventListener('click', function () {
-    var mapPin = document.querySelectorAll('.map__pin');
-    mapPin.classList.remove('map__pin--active');
-    // pin.classList.add('map__pin--active');
+    var mapPinsList = document.querySelectorAll('.map__pin');
+    mapPinsList.forEach(function (element) {
+      element.classList.remove('map__pin--active');
+    });
+    pin.classList.add('map__pin--active');
     openCard(index);
   });
   pin.addEventListener('keydown', function (evt) {
