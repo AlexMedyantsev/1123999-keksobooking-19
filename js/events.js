@@ -5,9 +5,7 @@
   var checkOutSelect = window.constants.AD_FORM.querySelector('#timeout');
   var formSubmitButton = window.constants.AD_FORM.querySelector('.ad-form__submit');
 
-  window.constants.MAIN_MAP_PIN.addEventListener('click', function () {
-    window.form.activate();
-  });
+  window.constants.MAIN_MAP_PIN.addEventListener('click', window.form.activate);
 
   formSubmitButton.addEventListener('click', function () {
     window.form.validate();

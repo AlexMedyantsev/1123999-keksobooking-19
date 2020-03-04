@@ -45,6 +45,7 @@
     fadeInForm();
     window.utils.writeLocationInInput(window.utils.getElementMiddleBottomPosition(window.constants.MAIN_MAP_PIN), addressInput);
     window.pin.render();
+    window.constants.MAIN_MAP_PIN.removeEventListener('click', window.form.activate);
   };
 
   var validateForm = function () {

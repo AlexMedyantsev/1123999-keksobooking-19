@@ -9,5 +9,6 @@
     MAIN_MAP_PIN: document.querySelector('.map__pin--main'),
     MAP_FILTERS_FORM: document.querySelector('.map__filters'),
     AD_FORM: document.querySelector('.ad-form'),
+    ADDRESS_INPUT: document.querySelector('#address'),
   };
 })();
