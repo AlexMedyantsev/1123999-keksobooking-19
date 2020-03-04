@@ -120,7 +120,7 @@
 
   window.constants.MAIN_MAP_PIN.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
-  
+
     var startCoords = {
       x: evt.clientX,
       y: evt.clientY
