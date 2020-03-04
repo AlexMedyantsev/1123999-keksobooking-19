@@ -18,7 +18,7 @@
 
     for (var i = 0; i < window.constants.AD_AMOUNT; i++) {
       var pin = generateMapPin(window.data.generatedAd[i]);
-      window.pin.setPinHandlers(pin, i, window.card.open);
+      window.pin.setHandlers(pin, i, window.card.open);
       fragment.appendChild(pin);
     }
 
@@ -44,6 +44,6 @@
   window.pin = {
     generate: generateMapPin,
     render: renderAllMapPins,
-    setPinHandlers: setPinHandlers,
+    setHandlers: setPinHandlers,
   };
 })();
