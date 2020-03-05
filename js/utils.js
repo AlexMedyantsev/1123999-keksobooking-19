@@ -57,6 +57,10 @@
     input.setAttribute('required', 'required');
   };
 
+  var makeInputReadOnly = function (input) {
+    input.setAttribute('readonly', true);
+  };
+
   window.utils = {
     getRandomInteger: getRandomInteger,
     getRandomStringFromArray: getRandomStringFromArray,
@@ -66,5 +70,6 @@
     getElementMiddleBottomPosition: getElementMiddleBottomPosition,
     writeLocationInInput: writeLocationInInput,
     setInputRequired: setInputRequired,
+    makeInputReadOnly: makeInputReadOnly,
   };
 })();

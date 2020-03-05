@@ -35,6 +35,7 @@
   // Действия которые выполняются по дефолту
   disableForm(window.constants.MAP_FILTERS_FORM);
   disableForm(window.constants.AD_FORM);
+  window.utils.makeInputReadOnly(addressInput);
   window.utils.writeLocationInInput(window.utils.getElementLocation(window.constants.MAIN_MAP_PIN), addressInput);
 
 
@@ -92,12 +93,6 @@
     };
 
     validatePriceInput(priceInput);
-
-    var makeInputReadOnly = function (input) {
-      input.setAttribute('readonly', true);
-    };
-
-    makeInputReadOnly(addressInput);
 
     var syncPlaceTypeAndMinPrice = function (place, price) {
       if (place.value === 'bungalo') {
