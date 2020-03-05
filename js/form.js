@@ -35,6 +35,7 @@
   // Действия которые выполняются по дефолту
   disableForm(window.constants.MAP_FILTERS_FORM);
   disableForm(window.constants.AD_FORM);
+  window.utils.makeInputReadOnly(addressInput);
   window.utils.writeLocationInInput(window.utils.getElementLocation(window.constants.MAIN_MAP_PIN), addressInput);
 
 
@@ -45,6 +46,7 @@
     fadeInForm();
     window.utils.writeLocationInInput(window.utils.getElementMiddleBottomPosition(window.constants.MAIN_MAP_PIN), addressInput);
     window.pin.render();
+    window.constants.MAIN_MAP_PIN.removeEventListener('click', window.form.activate);
   };
 
   var validateForm = function () {
@@ -91,12 +93,6 @@
     };
 
     validatePriceInput(priceInput);
-
-    var makeInputReadOnly = function (input) {
-      input.setAttribute('readonly', true);
-    };
-
-    makeInputReadOnly(addressInput);
 
     var syncPlaceTypeAndMinPrice = function (place, price) {
       if (place.value === 'bungalo') {
