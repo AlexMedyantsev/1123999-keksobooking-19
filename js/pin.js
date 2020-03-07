@@ -15,9 +15,10 @@
 
   var renderAllMapPins = function () {
     var fragment = document.createDocumentFragment();
+    var pinsArray = window.data.get();
 
     for (var i = 0; i < window.constants.AD_AMOUNT; i++) {
-      var pin = generateMapPin(window.data.generatedAd[i]);
+      var pin = generateMapPin(pinsArray[i]);
       window.pin.setHandlers(pin, i, window.card.open);
       fragment.appendChild(pin);
     }
@@ -90,9 +91,21 @@
     document.addEventListener('mouseup', onMouseUp);
   });
 
+  var onPinDataLoaded = function (pins) {
+    window.data.set(pins);
+    renderAllMapPins();
+  };
+
+  var onPinDataLoadError = function () {
+    // eslint-disable-next-line no-console
+    console.log('Error 2');
+  };
+
   window.pin = {
     generate: generateMapPin,
     render: renderAllMapPins,
     setHandlers: setPinHandlers,
+    onDataLoaded: onPinDataLoaded,
+    onDataLoadError: onPinDataLoadError,
   };
 })();
