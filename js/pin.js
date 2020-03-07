@@ -104,11 +104,12 @@
   var onPinDataLoaded = function (pins) {
     window.data.set(pins);
     renderAllMapPins();
-  }
+  };
 
   var onPinDataLoadError = function () {
+    // eslint-disable-next-line no-console
     console.log('Error 2');
-  }
+  };
 
   window.pin = {
     generate: generateMapPin,

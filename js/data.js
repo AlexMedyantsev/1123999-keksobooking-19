@@ -24,5 +24,5 @@
     get: function () {
       return serverData;
     }
-  }
+  };
 })();
