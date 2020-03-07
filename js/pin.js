@@ -91,16 +91,6 @@
     document.addEventListener('mouseup', onMouseUp);
   });
 
-  // var onPinDataLoaded = function (pins) {
-  //   window.data.set(pins);
-  //   renderAllMapPins();
-  // };
-
-  // var onPinDataLoadError = function (error) {
-  //   // eslint-disable-next-line no-console
-  //   console.log(error);
-  // };
-
   var onPinDataLoaded = function (pins) {
     window.data.set(pins);
     renderAllMapPins();
