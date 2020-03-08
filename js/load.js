@@ -28,4 +28,50 @@
     xhr.open('GET', URL);
     xhr.send();
   };
+
+  // window.upload = function (form, callback, error) {
+  //   var URL = form.action
+  //   var xhr = new XMLHttpRequest();
+
+  //   xhr.addEventListener('onload', function () {
+  //     if (xhr.status === 200) {
+  //       callback();
+  //     } else {
+  //       error();
+  //     }
+  //   });
+
+  //   xhr.open('POST', URL);
+  //   xhr.send();
+  // }
+
+  window.constants.AD_FORM.onsubmit = function (form) {
+    form.preventDefault();
+
+    var data = {};
+    for (var i = 0, ii = window.constants.AD_FORM.length; i < ii; ++i) {
+      var input = window.constants.AD_FORM[i];
+      if (input.name) {
+        data[input.name] = input.value;
+      }
+    }
+
+    // Construct an HTTP request
+    var xhr = new XMLHttpRequest();
+    xhr.open(window.constants.AD_FORM.method, window.constants.AD_FORM.action, true);
+    xhr.setRequestHeader('Accept', 'application/json; charset=utf-8');
+    xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+
+    // Send the collected data as JSON
+    xhr.send(JSON.stringify(data));
+
+    // Callback function
+    xhr.onloadend = function (response) {
+      if (response.target.status === 200) {
+
+        window.form.disableForm();
+
+      }
+    };
+  }
 })();
