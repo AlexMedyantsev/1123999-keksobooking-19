@@ -101,11 +101,19 @@
     console.log('Error 2');
   };
 
+  var removeAllPins = function () {
+    var allMapPins = document.querySelectorAll('.map__pin:not(.map__pin--main)');
+    for (var i = 0; i < allMapPins.length; i++) {
+      allMapPins[i].remove();
+    }
+  };
+
   window.pin = {
     generate: generateMapPin,
     render: renderAllMapPins,
     setHandlers: setPinHandlers,
     onDataLoaded: onPinDataLoaded,
     onDataLoadError: onPinDataLoadError,
+    removeAll: removeAllPins,
   };
 })();

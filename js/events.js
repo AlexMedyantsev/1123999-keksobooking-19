@@ -19,6 +19,12 @@
     window.form.syncCheckinAndCheckout(checkOutSelect, checkInSelect);
   });
 
+  window.constants.AD_FORM.addEventListener('submit', function (evt) {
+    evt.preventDefault();
+
+    window.sendData(window.form.getData(), window.form.disableAll(), window.form.onError());
+  });
+
   window.events = {
     // setElementClickHandler: setElementClickHandler,
     // setElementKeyDownHandler: setElementKeyDownHandler,

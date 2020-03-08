@@ -7,12 +7,17 @@
   var priceInput = window.constants.AD_FORM.querySelector('#price');
   var addressInput = window.constants.AD_FORM.querySelector('#address');
   var placeInput = window.constants.AD_FORM.querySelector('#type');
+  var getFormData = function () {
+    var formData = new FormData(window.constants.AD_FORM);
+    return formData;
+  };
 
   var disableForm = function (form) {
     var formElements = form.elements;
 
     for (var i = 0; i < form.length; i++) {
       formElements[i].disabled = true;
+
     }
   };
 
@@ -32,11 +37,32 @@
     window.constants.AD_FORM.classList.remove('ad-form--disabled');
   };
 
+  var fadeOutForm = function () {
+    window.constants.AD_FORM.classList.add('ad-form--disabled');
+  };
+
+  var fadeOutMap = function () {
+    window.constants.MAP.classList.add('map--faded');
+  };
+
+  var resetAll = function () {
+    window.constants.AD_FORM.reset();
+    window.utils.writeLocationInInput(window.utils.getElementLocation(window.constants.MAIN_MAP_PIN), addressInput);
+    fadeOutForm();
+    fadeOutMap();
+    window.pin.removeAll();
+    window.constants.MAIN_MAP_PIN.addEventListener('click', window.form.activate);
+    window.utils.setElementPosition(window.constants.MAIN_MAP_PIN, mainMapPinInitialPosition);
+  };
+
+
   // Действия которые выполняются по дефолту
   disableForm(window.constants.MAP_FILTERS_FORM);
   disableForm(window.constants.AD_FORM);
   window.utils.makeInputReadOnly(addressInput);
   window.utils.writeLocationInInput(window.utils.getElementLocation(window.constants.MAIN_MAP_PIN), addressInput);
+
+  var mainMapPinInitialPosition = window.utils.getElementLocation(window.constants.MAIN_MAP_PIN);
 
 
   var activatePage = function () {
@@ -127,10 +153,64 @@
     }
   };
 
+  var showSuccessMessage = function () {
+    var successMessage = document.querySelector('#success').content.querySelector('.success');
+    var successMessageTemplate = successMessage.cloneNode(true);
+    window.constants.MAP.appendChild(successMessageTemplate);
+
+    var removeSuccessMessage = function () {
+      window.utils.removeElement(successMessageTemplate);
+      document.removeEventListener('click', removeSuccessMessage);
+      document.removeEventListener('keydown', removeSuccessMessage);
+    };
+
+    document.addEventListener('click', removeSuccessMessage);
+    document.addEventListener('keydown', function (evt) {
+      if (evt.keyCode === 27) {
+        removeSuccessMessage();
+      }
+    });
+  };
+
+  var showErrorMessage = function () {
+    var errorMessage = document.querySelector('#error').content.querySelector('.error');
+    var errorMessageTemplate = errorMessage.cloneNode(true);
+    window.constants.MAP.appendChild(errorMessageTemplate);
+
+    var removeErrorMessage = function () {
+      window.utils.removeElement(errorMessageTemplate);
+      document.removeEventListener('click', removeErrorMessage);
+      document.removeEventListener('keydown', removeErrorMessage);
+    };
+
+    document.addEventListener('click', removeErrorMessage);
+    document.addEventListener('keydown', function (evt) {
+      if (evt.keyCode === 27) {
+        removeErrorMessage();
+      }
+    });
+  };
+
+  var disableAll = function () {
+    disableForm(window.constants.AD_FORM);
+    resetAll();
+    showSuccessMessage();
+  };
+
+  var onError = function () {
+    showErrorMessage();
+  };
+
   window.form = {
     activate: activatePage,
     disable: disableForm,
     validate: validateForm,
     syncCheckinAndCheckout: syncCheckinAndCheckout,
+    getData: getFormData,
+    resetAll: resetAll,
+    showSuccessMessage: showSuccessMessage,
+    showErrorMessage: showErrorMessage,
+    disableAll: disableAll,
+    onError: onError,
   };
 })();

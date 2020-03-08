@@ -38,6 +38,11 @@
     return locationCoordinates;
   };
 
+  var setElementPosition = function (element, position) {
+    element.style.left = position.location.x + 'px';
+    element.style.top = position.location.y + 'px';
+  };
+
   var getElementMiddleBottomPosition = function (element) {
     var elementLocationCoordinates = {
       'location': {
@@ -61,15 +66,21 @@
     input.setAttribute('readonly', true);
   };
 
+  var removeElement = function (element) {
+    element.remove();
+  };
+
   window.utils = {
     getRandomInteger: getRandomInteger,
     getRandomStringFromArray: getRandomStringFromArray,
     shuffleArray: shuffleArray,
     generateArrayOfStrings: generateArrayOfStrings,
     getElementLocation: getElementLocation,
+    setElementPosition: setElementPosition,
     getElementMiddleBottomPosition: getElementMiddleBottomPosition,
     writeLocationInInput: writeLocationInInput,
     setInputRequired: setInputRequired,
     makeInputReadOnly: makeInputReadOnly,
+    removeElement: removeElement,
   };
 })();
