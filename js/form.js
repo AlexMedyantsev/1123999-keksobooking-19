@@ -175,7 +175,7 @@
   var showErrorMessage = function () {
     var errorMessage = document.querySelector('#error').content.querySelector('.error');
     var errorMessageTemplate = errorMessage.cloneNode(true);
-    window.constants.MAP.appendChild(errorMessageTemplate);
+    window.constants.MAIN.appendChild(errorMessageTemplate);
 
     var removeErrorMessage = function () {
       window.utils.removeElement(errorMessageTemplate);
@@ -196,11 +196,7 @@
     resetAll();
     showSuccessMessage();
   };
-
-  var onError = function () {
-    showErrorMessage();
-  };
-
+  
   window.form = {
     activate: activatePage,
     disable: disableForm,
@@ -211,6 +207,5 @@
     showSuccessMessage: showSuccessMessage,
     showErrorMessage: showErrorMessage,
     disableAll: disableAll,
-    onError: onError,
   };
 })();

@@ -29,7 +29,7 @@
     xhr.send();
   };
 
-  window.sendData = function (data, onSuccess, onError) {
+  window.sendData = function (data) {
     var xhr = new XMLHttpRequest();
     var URL = 'https://js.dump.academy/keksobooking';
 
@@ -39,11 +39,11 @@
       switch (xhr.status) {
         case 200:
           // eslint-disable-next-line no-unused-expressions
-          onSuccess;
+          window.form.disableAll();
           break;
         case 500:
           // eslint-disable-next-line no-unused-expressions
-          onError;
+          window.form.showErrorMessage();
           break;
       }
     });
