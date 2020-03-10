@@ -196,7 +196,7 @@
     resetAll();
     showSuccessMessage();
   };
-  
+
   window.form = {
     activate: activatePage,
     disable: disableForm,

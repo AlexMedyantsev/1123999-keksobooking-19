@@ -72,9 +72,8 @@
 
     hideEmptyTextElement(mapCardDescription, ad.offer.description);
 
-
+    mapCardPhotos.innerHTML = '';
     if (ad.offer.photos.length > 0) {
-      mapCardPhotos.innerHTML = '';
       for (var j = 0; j < ad.offer.photos.length; j++) {
         var photoElement = photoTemplate.cloneNode(false);
         photoElement.setAttribute('src', ad.offer.photos[j]);
@@ -98,8 +97,8 @@
     window.constants.MAP_PINS.appendChild(card);
   };
 
-  var openCard = function (index) {
-    var mapCard = generateOneMapCard(window.data.generatedAd[index]);
+  var openCard = function (pinData) {
+    var mapCard = generateOneMapCard(pinData);
     removeRenderedCard();
     renderMapCard(mapCard);
     // var closeButton = mapCard.querySelector('.popup_close');
