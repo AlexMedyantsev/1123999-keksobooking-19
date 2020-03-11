@@ -19,25 +19,25 @@
 
     for (var i = 0; i < window.constants.AD_AMOUNT; i++) {
       var pin = generateMapPin(pinsArray[i]);
-      window.pin.setHandlers(pin, i, window.card.open);
+      setPinHandlers(pin, pinsArray[i], window.card.open);
       fragment.appendChild(pin);
     }
 
     window.constants.MAP_PINS.appendChild(fragment);
   };
 
-  var setPinHandlers = function (pin, index, handler) {
+  var setPinHandlers = function (pin, pinData, handler) {
     pin.addEventListener('click', function () {
       var mapPinsList = document.querySelectorAll('.map__pin');
       mapPinsList.forEach(function (element) {
         element.classList.remove('map__pin--active');
       });
       pin.classList.add('map__pin--active');
-      handler(index);
+      handler(pinData);
     });
     pin.addEventListener('keydown', function (evt) {
       if (evt.keyCode === 13) {
-        handler(index);
+        handler(pinData);
       }
     });
   };
@@ -101,11 +101,19 @@
     console.log('Error 2');
   };
 
+  var removeAllPins = function () {
+    var allMapPins = document.querySelectorAll('.map__pin:not(.map__pin--main)');
+    for (var i = 0; i < allMapPins.length; i++) {
+      allMapPins[i].remove();
+    }
+  };
+
   window.pin = {
     generate: generateMapPin,
     render: renderAllMapPins,
     setHandlers: setPinHandlers,
     onDataLoaded: onPinDataLoaded,
     onDataLoadError: onPinDataLoadError,
+    removeAll: removeAllPins,
   };
 })();

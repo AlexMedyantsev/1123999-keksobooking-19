@@ -3,6 +3,7 @@
 (function () {
   window.constants = {
     AD_AMOUNT: 8,
+    MAIN: document.querySelector('main'),
     MAP: document.querySelector('.map'),
     MAP_CARD_TEMPLATE: document.querySelector('#card').content.querySelector('.map__card'),
     MAP_PINS: document.querySelector('.map__pins'),
@@ -10,5 +11,6 @@
     MAP_FILTERS_FORM: document.querySelector('.map__filters'),
     AD_FORM: document.querySelector('.ad-form'),
     ADDRESS_INPUT: document.querySelector('#address'),
+    AD_FORM_RESET_BUTTON: document.querySelector('.ad-form__reset'),
   };
 })();

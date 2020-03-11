@@ -28,4 +28,29 @@
     xhr.open('GET', URL);
     xhr.send();
   };
+
+  window.sendData = function (data) {
+    var xhr = new XMLHttpRequest();
+    var URL = 'https://js.dump.academy/keksobooking';
+
+    xhr.responseType = 'json';
+
+    xhr.addEventListener('load', function () {
+      switch (xhr.status) {
+        case 200:
+          // eslint-disable-next-line no-unused-expressions
+          window.form.disableAll();
+          break;
+        case 500:
+          // eslint-disable-next-line no-unused-expressions
+          window.form.showErrorMessage();
+          break;
+      }
+    });
+
+    xhr.open('POST', URL);
+
+    xhr.send(data);
+  };
+
 })();
