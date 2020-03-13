@@ -25,6 +25,11 @@
     window.utils.writeLocationInInput(window.utils.getElementLocation(window.constants.MAIN_MAP_PIN), window.constants.ADDRESS_INPUT);
   });
 
+  window.constants.MAP_FILTERS_FORM.addEventListener('change', function () {
+    window.pin.removeAll();
+    window.filter.updatePins();
+    window.card.remove();
+  });
 
   window.constants.AD_FORM.addEventListener('submit', function (evt) {
     evt.preventDefault();

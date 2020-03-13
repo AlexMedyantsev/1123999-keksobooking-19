@@ -101,8 +101,8 @@
     var mapCard = generateOneMapCard(pinData);
     removeRenderedCard();
     renderMapCard(mapCard);
-    // var closeButton = mapCard.querySelector('.popup_close');
-    mapCard.addEventListener('click', removeRenderedCard);
+    var closeButton = mapCard.querySelector('.popup__close');
+    closeButton.addEventListener('click', removeRenderedCard);
     document.addEventListener('keydown', function (evt) {
       if (evt.keyCode === 27) {
         removeRenderedCard();
@@ -119,5 +119,6 @@
 
   window.card = {
     open: openCard,
+    remove: removeRenderedCard,
   };
 })();
