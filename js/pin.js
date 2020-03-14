@@ -13,11 +13,12 @@
     return mapPinElement;
   };
 
-  var renderAllMapPins = function () {
+  var renderAllMapPins = function (pinsArray) {
     var fragment = document.createDocumentFragment();
-    var pinsArray = window.data.get();
 
-    for (var i = 0; i < window.constants.AD_AMOUNT; i++) {
+    var pinsAmount = pinsArray.length < window.constants.AD_AMOUNT ? pinsArray.length : window.constants.AD_AMOUNT;
+
+    for (var i = 0; i < pinsAmount; i++) {
       var pin = generateMapPin(pinsArray[i]);
       setPinHandlers(pin, pinsArray[i], window.card.open);
       fragment.appendChild(pin);
@@ -93,7 +94,7 @@
 
   var onPinDataLoaded = function (pins) {
     window.data.set(pins);
-    renderAllMapPins();
+    renderAllMapPins(pins);
   };
 
   var onPinDataLoadError = function () {
