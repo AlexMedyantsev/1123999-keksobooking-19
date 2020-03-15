@@ -115,6 +115,8 @@
       window.utils.setInputRequired(price);
       if (parseInt(price.value, 10) > 1000000) {
         priceInput.setCustomValidity('Маскимальная цена 1.000.000 Рублей');
+      } else {
+        priceInput.setCustomValidity('');
       }
     };
 
