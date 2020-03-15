@@ -103,17 +103,20 @@
     renderMapCard(mapCard);
     var closeButton = mapCard.querySelector('.popup__close');
     closeButton.addEventListener('click', removeRenderedCard);
-    document.addEventListener('keydown', function (evt) {
-      if (evt.keyCode === 27) {
-        removeRenderedCard();
-      }
-    });
+    document.addEventListener('keydown', onEscapePress);
   };
+
+  var onEscapePress = function (evt) {
+    if (evt.keyCode === 27) {
+      removeRenderedCard();
+    }
+  }
 
   var removeRenderedCard = function () {
     var mapCard = window.constants.MAP.querySelector('.map__card');
     if (mapCard) {
       mapCard.remove();
+      document.removeEventListener('keydown', onEscapePress);
     }
   };
 
