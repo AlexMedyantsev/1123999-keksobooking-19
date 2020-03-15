@@ -93,8 +93,12 @@
   });
 
   var onPinDataLoaded = function (pins) {
-    window.data.set(pins);
-    renderAllMapPins(pins);
+    window.form.activate();
+    var ArrayWithOffer = pins.filter(function (element) {
+      return element.offer;
+    });
+    window.data.set(ArrayWithOffer);
+    renderAllMapPins(ArrayWithOffer);
   };
 
   var onPinDataLoadError = function () {

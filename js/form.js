@@ -72,7 +72,6 @@
     fadeInForm();
     window.utils.writeLocationInInput(window.utils.getElementMiddleBottomPosition(window.constants.MAIN_MAP_PIN), addressInput);
     window.constants.MAIN_MAP_PIN.removeEventListener('click', window.form.activate);
-    window.load(window.pin.onDataLoaded, window.pin.onDataLoadError);
   };
 
   var validateForm = function () {
@@ -197,6 +196,11 @@
     showSuccessMessage();
   };
 
+  var disableAllNoMessage = function () {
+    disableForm(window.constants.AD_FORM);
+    resetAll();
+  }
+
   window.form = {
     activate: activatePage,
     disable: disableForm,
@@ -207,5 +211,6 @@
     showSuccessMessage: showSuccessMessage,
     showErrorMessage: showErrorMessage,
     disableAll: disableAll,
+    disableAllNoMessage: disableAllNoMessage,
   };
 })();
