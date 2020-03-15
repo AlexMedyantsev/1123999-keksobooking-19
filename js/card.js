@@ -110,7 +110,7 @@
     if (evt.keyCode === 27) {
       removeRenderedCard();
     }
-  }
+  };
 
   var removeRenderedCard = function () {
     var mapCard = window.constants.MAP.querySelector('.map__card');
