@@ -80,10 +80,10 @@
       var rooms = parseInt(roomNumberInput.value, 10);
       var guests = parseInt(capacityInput.value, 10);
       if (guests && rooms === 100) {
-        roomNumberInput.setCustomValidity('какое-то сообщение');
+        roomNumberInput.setCustomValidity('Выберите меньшее количество комнат');
         capacityInput.setCustomValidity('');
       } else if (guests === 0 && rooms !== 100) {
-        capacityInput.setCustomValidity('какое-то сообщение (2)');
+        capacityInput.setCustomValidity('Выберите большее количество гостей');
         roomNumberInput.setCustomValidity('');
       } else if (guests > rooms) {
         roomNumberInput.setCustomValidity('Нужно больше комнат');
