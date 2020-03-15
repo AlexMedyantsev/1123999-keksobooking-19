@@ -68,7 +68,7 @@
       var currentX = window.constants.MAIN_MAP_PIN.offsetLeft - shift.x;
       var currentY = window.constants.MAIN_MAP_PIN.offsetTop - shift.y;
 
-      if (currentX > 0 - 31 && currentX <= 1200 - 31 && currentY > 130 - 62 && currentY <= 630) {
+      if (currentX > 0 - 33 && currentX <= 1200 - 31 && currentY > 130 - 62 && currentY <= 630) {
         window.constants.MAIN_MAP_PIN.style.top = (window.constants.MAIN_MAP_PIN.offsetTop - shift.y) + 'px';
         window.constants.MAIN_MAP_PIN.style.left = (window.constants.MAIN_MAP_PIN.offsetLeft - shift.x) + 'px';
         window.utils.writeLocationInInput({
