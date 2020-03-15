@@ -153,6 +153,8 @@
     }
   };
 
+  syncPlaceTypeAndMinPrice(placeInput, priceInput);
+
   var showSuccessMessage = function () {
     var successMessage = document.querySelector('#success').content.querySelector('.success');
     var successMessageTemplate = successMessage.cloneNode(true);
