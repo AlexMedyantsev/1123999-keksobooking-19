@@ -3,6 +3,8 @@
 (function () {
   var checkInSelect = window.constants.AD_FORM.querySelector('#timein');
   var checkOutSelect = window.constants.AD_FORM.querySelector('#timeout');
+  var priceInput = window.constants.AD_FORM.querySelector('#price');
+  var placeInput = window.constants.AD_FORM.querySelector('#type');
   var formSubmitButton = window.constants.AD_FORM.querySelector('.ad-form__submit');
 
   window.constants.MAIN_MAP_PIN.addEventListener('click', function () {
@@ -11,6 +13,10 @@
 
   formSubmitButton.addEventListener('click', function () {
     window.form.validate();
+  });
+
+  placeInput.addEventListener('change', function () {
+    window.form.syncPlaceTypeAndMinPrice(placeInput, priceInput);
   });
 
   checkInSelect.addEventListener('change', function () {
