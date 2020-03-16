@@ -34,20 +34,11 @@
       case 'any':
         return pin;
       case 'middle':
-        if (pin.offer.price >= 10000 && pin.offer.price <= 50000) {
-          return pin.offer.price;
-        }
-        break;
+        return pin.offer.price >= 10000 && pin.offer.price <= 50000;
       case 'low':
-        if (pin.offer.price < 10000) {
-          return pin.offer.price;
-        }
-        break;
+        return pin.offer.price < 10000;
       case 'high':
-        if (pin.offer.price > 50000) {
-          return pin.offer.price;
-        }
-        break;
+        return pin.offer.price > 50000;
       default:
         return pin;
     }
