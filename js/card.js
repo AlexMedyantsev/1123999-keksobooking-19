@@ -1,30 +1,30 @@
 'use strict';
 
 (function () {
-  var getAdType = function (ad) {
-    switch (ad.offer.type) {
+  var getAdType = function (pinData) {
+    switch (pinData.offer.type) {
       case 'flat': return 'Квартира';
       case 'bungalo': return 'Бунгало';
       case 'house': return 'Дом';
       case 'palace': return 'Дворец';
     }
-    return ad.offer.type;
+    return pinData.offer.type;
   };
 
-  var getRoomsAndGuests = function (ad) {
+  var getRoomsAndGuests = function (pinData) {
     var roomsAndGuests = '';
 
-    if (ad.offer.rooms && ad.offer.guests) {
-      roomsAndGuests = ad.offer.rooms + ' комнаты для ' + ad.offer.guests + ' гостей';
+    if (pinData.offer.rooms && pinData.offer.guests) {
+      roomsAndGuests = pinData.offer.rooms + ' комнаты для ' + pinData.offer.guests + ' гостей';
     }
     return roomsAndGuests;
   };
 
-  var getCheckinAndCheckoutTime = function (ad) {
+  var getCheckinAndCheckoutTime = function (pinData) {
     var checkinAndCheckoutTime = '';
 
-    if (ad.offer.checkin && ad.offer.checkout) {
-      checkinAndCheckoutTime = 'Заезд после ' + ad.offer.checkin + ', выезд до ' + ad.offer.checkout;
+    if (pinData.offer.checkin && pinData.offer.checkout) {
+      checkinAndCheckoutTime = 'Заезд после ' + pinData.offer.checkin + ', выезд до ' + pinData.offer.checkout;
     }
     return checkinAndCheckoutTime;
   };
@@ -36,7 +36,7 @@
       element.classList.add('hidden');
     }
   };
-  var generateOneMapCard = function (ad) {
+  var generateOneMapCard = function (pinData) {
     var mapCardElement = window.constants.MAP_CARD_TEMPLATE.cloneNode(true);
 
     var mapCardTitle = mapCardElement.querySelector('.popup__title');
@@ -52,39 +52,39 @@
     var photoTemplate = mapCardPhotos.querySelector('img');
     var mapCardAvatar = mapCardElement.querySelector('.popup__avatar');
 
-    hideEmptyTextElement(mapCardTitle, ad.offer.title);
-    hideEmptyTextElement(mapCardAddress, ad.offer.address);
-    hideEmptyTextElement(mapCardPrice, ad.offer.price);
-    hideEmptyTextElement(mapCardType, getAdType(ad));
-    hideEmptyTextElement(mapCardRoomsAndGuests, getRoomsAndGuests(ad));
-    hideEmptyTextElement(mapCardCheckinAndCheckouts, getCheckinAndCheckoutTime(ad));
+    hideEmptyTextElement(mapCardTitle, pinData.offer.title);
+    hideEmptyTextElement(mapCardAddress, pinData.offer.address);
+    hideEmptyTextElement(mapCardPrice, pinData.offer.price);
+    hideEmptyTextElement(mapCardType, getAdType(pinData));
+    hideEmptyTextElement(mapCardRoomsAndGuests, getRoomsAndGuests(pinData));
+    hideEmptyTextElement(mapCardCheckinAndCheckouts, getCheckinAndCheckoutTime(pinData));
 
-    if (ad.offer.features.length > 0) {
+    if (pinData.offer.features.length > 0) {
       mapCardFeatures.innerHTML = '';
-      for (var i = 0; i < ad.offer.features.length; i++) {
+      for (var i = 0; i < pinData.offer.features.length; i++) {
         var featureElement = featureTemplate.cloneNode(false);
-        featureElement.className = 'popup__feature popup__feature--' + ad.offer.features[i];
+        featureElement.className = 'popup__feature popup__feature--' + pinData.offer.features[i];
         mapCardFeatures.appendChild(featureElement);
       }
     } else {
       mapCardFeatures.classList.add('hidden');
     }
 
-    hideEmptyTextElement(mapCardDescription, ad.offer.description);
+    hideEmptyTextElement(mapCardDescription, pinData.offer.description);
 
     mapCardPhotos.innerHTML = '';
-    if (ad.offer.photos.length > 0) {
-      for (var j = 0; j < ad.offer.photos.length; j++) {
+    if (pinData.offer.photos.length > 0) {
+      for (var j = 0; j < pinData.offer.photos.length; j++) {
         var photoElement = photoTemplate.cloneNode(false);
-        photoElement.setAttribute('src', ad.offer.photos[j]);
+        photoElement.setAttribute('src', pinData.offer.photos[j]);
         mapCardPhotos.appendChild(photoElement);
       }
     } else {
       mapCardPhotos.classList.add('hidden');
     }
 
-    if (ad.author.avatar) {
-      mapCardAvatar.setAttribute('src', ad.author.avatar);
+    if (pinData.author.avatar) {
+      mapCardAvatar.setAttribute('src', pinData.author.avatar);
     } else {
       mapCardAvatar.classList.add('hidden');
     }
