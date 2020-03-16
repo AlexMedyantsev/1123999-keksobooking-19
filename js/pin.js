@@ -108,7 +108,8 @@
 
   var onMainPinClick = function () {
     window.constants.MAIN_MAP_PIN.addEventListener('click', function handler() {
-      window.server.loadData(window.pin.onDataLoaded, window.pin.onDataLoadError);
+      window.server.loadData(window.pin.onDataLoaded, function (){
+      });
       window.constants.MAIN_MAP_PIN.removeEventListener('click', handler);
     });
   };
