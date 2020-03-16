@@ -3,18 +3,16 @@
 (function () {
 
   var filterPins = function (pin) {
-    var a = houseTypeCheck(pin);
-    var b = priceCheck(pin);
-    var c = roomsAmountCheck(pin);
-    var d = guestsAmountCheck(pin);
-    var e = featureCheck(window.constants.MAP_FILTER_WIFI, pin);
-    var f = featureCheck(window.constants.MAP_FILTER_DISHWASHER, pin);
-    var j = featureCheck(window.constants.MAP_FILTER_PARKING, pin);
-    var h = featureCheck(window.constants.MAP_FILTER_WASHER, pin);
-    var i = featureCheck(window.constants.MAP_FILTER_ELEVATOR, pin);
-    var k = featureCheck(window.constants.MAP_FILTER_CONDITIONER, pin);
-
-    return a && b && c && d && e && f && j && h && i && k;
+    return houseTypeCheck(pin) &&
+           priceCheck(pin) &&
+           roomsAmountCheck(pin) &&
+           guestsAmountCheck(pin) &&
+           featureCheck(window.constants.MAP_FILTER_WIFI, pin) &&
+           featureCheck(window.constants.MAP_FILTER_DISHWASHER, pin) &&
+           featureCheck(window.constants.MAP_FILTER_PARKING, pin) &&
+           featureCheck(window.constants.MAP_FILTER_WASHER, pin) &&
+           featureCheck(window.constants.MAP_FILTER_ELEVATOR, pin) &&
+           featureCheck(window.constants.MAP_FILTER_CONDITIONER, pin);
   };
 
   var houseTypeCheck = function (pin) {
@@ -34,20 +32,11 @@
       case 'any':
         return pin;
       case 'middle':
-        if (pin.offer.price >= 10000 && pin.offer.price <= 50000) {
-          return pin.offer.price;
-        }
-        break;
+        return pin.offer.price >= 10000 && pin.offer.price <= 50000;
       case 'low':
-        if (pin.offer.price < 10000) {
-          return pin.offer.price;
-        }
-        break;
+        return pin.offer.price < 10000;
       case 'high':
-        if (pin.offer.price > 50000) {
-          return pin.offer.price;
-        }
-        break;
+        return pin.offer.price > 50000;
       default:
         return pin;
     }
