@@ -1,4 +1,3 @@
-/* eslint-disable consistent-return */
 'use strict';
 
 (function () {
@@ -14,7 +13,6 @@
     var h = featureCheck(window.constants.MAP_FILTER_WASHER, pin);
     var i = featureCheck(window.constants.MAP_FILTER_ELEVATOR, pin);
     var k = featureCheck(window.constants.MAP_FILTER_CONDITIONER, pin);
-
 
     return a && b && c && d && e && f && j && h && i && k;
   };
@@ -50,6 +48,8 @@
           return pin.offer.price;
         }
         break;
+      default:
+        return pin;
     }
   };
 
@@ -63,6 +63,9 @@
         return pin.offer.rooms === 2;
       case '3':
         return pin.offer.rrooms === 3;
+        default:
+          return pin;
+      }
     }
   };
 

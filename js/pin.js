@@ -6,14 +6,14 @@
   var mainPinAccessedAreaTop = 64;
   var mainPinAccessedAreaBottom = 565;
 
-  var generateMapPin = function (ad) {
+  var generateMapPin = function (pinData) {
     var mapPinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
     var mapPinElement = mapPinTemplate.cloneNode(true);
 
-    mapPinElement.style.left = ad.location.x - window.constants.MAP_PIN_WIDTH / 2 + 'px';
-    mapPinElement.style.top = ad.location.y - window.constants.MAP_PIN_HEIGHT + 'px';
-    mapPinElement.querySelector('img').src = ad.author.avatar;
-    mapPinElement.querySelector('img').alt = ad.offer.title;
+    mapPinElement.style.left = pinData.location.x - window.constants.MAP_PIN_WIDTH / 2 + 'px';
+    mapPinElement.style.top = pinData.location.y - window.constants.MAP_PIN_HEIGHT + 'px';
+    mapPinElement.querySelector('img').src = pinData.author.avatar;
+    mapPinElement.querySelector('img').alt = pinData.offer.title;
 
     return mapPinElement;
   };
