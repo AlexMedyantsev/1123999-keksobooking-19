@@ -113,7 +113,7 @@
 
   var onMainPinClick = function () {
     window.constants.MAIN_MAP_PIN.addEventListener('click', function handler() {
-      window.load(window.pin.onDataLoaded, window.pin.onDataLoadError);
+      window.server.loadData(window.pin.onDataLoaded, window.pin.onDataLoadError);
       window.constants.MAIN_MAP_PIN.removeEventListener('click', handler);
     });
   };

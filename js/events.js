@@ -42,7 +42,7 @@
 
   window.constants.AD_FORM.addEventListener('submit', function (evt) {
     evt.preventDefault();
-    window.sendData(window.form.getData());
+    window.server.sendData(window.form.getData());
     window.constants.MAP_FILTERS_FORM.reset();
   });
 })();
