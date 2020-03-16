@@ -75,67 +75,42 @@
     window.constants.MAIN_MAP_PIN.removeEventListener('click', window.form.activate);
   };
 
-  var validateForm = function () {
-    var validateRoomAndGuestsSelects = function () {
-      var rooms = parseInt(roomNumberInput.value, 10);
-      var guests = parseInt(capacityInput.value, 10);
-      if (guests && rooms === 100) {
-        roomNumberInput.setCustomValidity('Выберите меньшее количество комнат');
-        capacityInput.setCustomValidity('');
-      } else if (guests === 0 && rooms !== 100) {
-        capacityInput.setCustomValidity('Выберите большее количество гостей');
-        roomNumberInput.setCustomValidity('');
-      } else if (guests > rooms) {
-        roomNumberInput.setCustomValidity('Нужно больше комнат');
-        capacityInput.setCustomValidity('');
-      } else {
-        roomNumberInput.setCustomValidity('');
-        capacityInput.setCustomValidity('');
-      }
-    };
-
-    validateRoomAndGuestsSelects();
-
-    var validateTitleInput = function (el) {
-      window.utils.setInputRequired(el);
-      var title = titleInput.value;
-      if (title.length < 30) {
-        titleInput.setCustomValidity('Минимум 30 символов');
-      } else if (title.length > 100) {
-        titleInput.setCustomValidity('Вы превысили максимально допустимое количество символов (100)');
-      } else {
-        titleInput.setCustomValidity('');
-      }
-    };
-
-    validateTitleInput(titleInput);
-
-
-    var validatePriceInput = function (price) {
-      window.utils.setInputRequired(price);
-      if (parseInt(price.value, 10) > 1000000) {
-        priceInput.setCustomValidity('Маскимальная цена 1.000.000 Рублей');
-      } else {
-        priceInput.setCustomValidity('');
-      }
-    };
-
-    validatePriceInput(priceInput);
-
-    syncPlaceTypeAndMinPrice(placeInput, priceInput);
+  var validateRoomAndGuestsSelects = function () {
+    var rooms = parseInt(roomNumberInput.value, 10);
+    var guests = parseInt(capacityInput.value, 10);
+    if (guests && rooms === 100) {
+      roomNumberInput.setCustomValidity('Выберите меньшее количество комнат');
+      capacityInput.setCustomValidity('');
+    } else if (guests === 0 && rooms !== 100) {
+      capacityInput.setCustomValidity('Выберите большее количество гостей');
+      roomNumberInput.setCustomValidity('');
+    } else if (guests > rooms) {
+      roomNumberInput.setCustomValidity('Выберите большее количество комнат');
+      capacityInput.setCustomValidity('');
+    } else {
+      roomNumberInput.setCustomValidity('');
+      capacityInput.setCustomValidity('');
+    }
   };
 
-  var syncCheckinAndCheckout = function (firstSelect, secondSelect) {
-    switch (firstSelect.value) {
-      case '12:00':
-        secondSelect.value = '12:00';
-        break;
-      case '13:00':
-        secondSelect.value = '13:00';
-        break;
-      case '14:00':
-        secondSelect.value = '14:00';
-        break;
+  var validateTitleInput = function (el) {
+    window.utils.setInputRequired(el);
+    var title = titleInput.value;
+    if (title.length < 30) {
+      titleInput.setCustomValidity('Минимум 30 символов');
+    } else if (title.length > 100) {
+      titleInput.setCustomValidity('Вы превысили максимально допустимое количество символов (100)');
+    } else {
+      titleInput.setCustomValidity('');
+    }
+  };
+
+  var validatePriceInput = function (price) {
+    window.utils.setInputRequired(price);
+    if (parseInt(price.value, 10) > 1000000) {
+      priceInput.setCustomValidity('Маскимальная цена 1.000.000 Рублей');
+    } else {
+      priceInput.setCustomValidity('');
     }
   };
 
@@ -156,6 +131,27 @@
   };
 
   syncPlaceTypeAndMinPrice(placeInput, priceInput);
+
+  var validateForm = function () {
+    validateRoomAndGuestsSelects();
+    validateTitleInput(titleInput);
+    validatePriceInput(priceInput);
+    syncPlaceTypeAndMinPrice(placeInput, priceInput);
+  };
+
+  var syncCheckinAndCheckout = function (firstSelect, secondSelect) {
+    switch (firstSelect.value) {
+      case '12:00':
+        secondSelect.value = '12:00';
+        break;
+      case '13:00':
+        secondSelect.value = '13:00';
+        break;
+      case '14:00':
+        secondSelect.value = '14:00';
+        break;
+    }
+  };
 
   var showSuccessMessage = function () {
     var successMessage = document.querySelector('#success').content.querySelector('.success');
