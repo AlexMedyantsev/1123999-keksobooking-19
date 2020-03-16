@@ -1,12 +1,17 @@
 'use strict';
 
 (function () {
+  var MainPinLeftOffset = 34;
+  var MainPinRightOffset = 32;
+  var mainPinAccessedAreaTop = 64;
+  var mainPinAccessedAreaBottom = 565;
+
   var generateMapPin = function (ad) {
     var mapPinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
     var mapPinElement = mapPinTemplate.cloneNode(true);
 
-    mapPinElement.style.left = ad.location.x - 25 + 'px';
-    mapPinElement.style.top = ad.location.y - 70 + 'px';
+    mapPinElement.style.left = ad.location.x - window.constants.MAP_PIN_WIDTH / 2 + 'px';
+    mapPinElement.style.top = ad.location.y - window.constants.MAP_PIN_HEIGHT + 'px';
     mapPinElement.querySelector('img').src = ad.author.avatar;
     mapPinElement.querySelector('img').alt = ad.offer.title;
 
@@ -68,7 +73,7 @@
       var currentX = window.constants.MAIN_MAP_PIN.offsetLeft - shift.x;
       var currentY = window.constants.MAIN_MAP_PIN.offsetTop - shift.y;
 
-      if (currentX > 0 - 33 && currentX <= 1200 - 31 && currentY > 130 - 62 && currentY <= 630) {
+      if (currentX > 0 - MainPinLeftOffset && currentX <= window.constants.MAP.offsetWidth - MainPinRightOffset && currentY > mainPinAccessedAreaTop && currentY <= mainPinAccessedAreaBottom) {
         window.constants.MAIN_MAP_PIN.style.top = (window.constants.MAIN_MAP_PIN.offsetTop - shift.y) + 'px';
         window.constants.MAIN_MAP_PIN.style.left = (window.constants.MAIN_MAP_PIN.offsetLeft - shift.x) + 'px';
         window.utils.writeLocationInInput({

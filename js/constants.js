@@ -3,6 +3,8 @@
 (function () {
   window.constants = {
     AD_AMOUNT: 5,
+    MAP_PIN_WIDTH: 50,
+    MAP_PIN_HEIGHT: 70,
     MAIN: document.querySelector('main'),
     MAP: document.querySelector('.map'),
     MAP_CARD_TEMPLATE: document.querySelector('#card').content.querySelector('.map__card'),
