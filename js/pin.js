@@ -1,12 +1,17 @@
 'use strict';
 
 (function () {
+  var MainPinLeftOffset = 34;
+  var MainPinRightOffset = 32;
+  var mainPinAccessedAreaTop = 64;
+  var mainPinAccessedAreaBottom = 565;
+
   var generateMapPin = function (ad) {
     var mapPinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
     var mapPinElement = mapPinTemplate.cloneNode(true);
 
-    mapPinElement.style.left = ad.location.x - 25 + 'px';
-    mapPinElement.style.top = ad.location.y - 70 + 'px';
+    mapPinElement.style.left = ad.location.x - window.constants.MAP_PIN_WIDTH / 2 + 'px';
+    mapPinElement.style.top = ad.location.y - window.constants.MAP_PIN_HEIGHT + 'px';
     mapPinElement.querySelector('img').src = ad.author.avatar;
     mapPinElement.querySelector('img').alt = ad.offer.title;
 
@@ -68,7 +73,7 @@
       var currentX = window.constants.MAIN_MAP_PIN.offsetLeft - shift.x;
       var currentY = window.constants.MAIN_MAP_PIN.offsetTop - shift.y;
 
-      if (currentX > 0 - 31 && currentX <= 1200 - 31 && currentY > 130 - 62 && currentY <= 630) {
+      if (currentX > 0 - MainPinLeftOffset && currentX <= window.constants.MAP.offsetWidth - MainPinRightOffset && currentY > mainPinAccessedAreaTop && currentY <= mainPinAccessedAreaBottom) {
         window.constants.MAIN_MAP_PIN.style.top = (window.constants.MAIN_MAP_PIN.offsetTop - shift.y) + 'px';
         window.constants.MAIN_MAP_PIN.style.left = (window.constants.MAIN_MAP_PIN.offsetLeft - shift.x) + 'px';
         window.utils.writeLocationInInput({
@@ -93,14 +98,23 @@
   });
 
   var onPinDataLoaded = function (pins) {
-    window.data.set(pins);
-    renderAllMapPins(pins);
+    window.form.activate();
+    var ArrayWithOffer = pins.filter(function (element) {
+      return element.offer;
+    });
+    window.data.set(ArrayWithOffer);
+    renderAllMapPins(ArrayWithOffer);
   };
 
-  var onPinDataLoadError = function () {
-    // eslint-disable-next-line no-console
-    console.log('Error 2');
+  var onMainPinClick = function () {
+    window.constants.MAIN_MAP_PIN.addEventListener('click', function handler() {
+      window.server.loadData(window.pin.onDataLoaded, function () {
+      });
+      window.constants.MAIN_MAP_PIN.removeEventListener('click', handler);
+    });
   };
+
+  onMainPinClick();
 
   var removeAllPins = function () {
     var allMapPins = document.querySelectorAll('.map__pin:not(.map__pin--main)');
@@ -114,7 +128,7 @@
     render: renderAllMapPins,
     setHandlers: setPinHandlers,
     onDataLoaded: onPinDataLoaded,
-    onDataLoadError: onPinDataLoadError,
     removeAll: removeAllPins,
+    onMainClick: onMainPinClick,
   };
 })();
