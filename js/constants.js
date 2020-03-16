@@ -5,6 +5,8 @@
     AD_AMOUNT: 5,
     MAP_PIN_WIDTH: 50,
     MAP_PIN_HEIGHT: 70,
+    ENTER_KEYCODE: 13,
+    ESC_KEYCODE: 27,
     MAIN: document.querySelector('main'),
     MAP: document.querySelector('.map'),
     MAP_CARD_TEMPLATE: document.querySelector('#card').content.querySelector('.map__card'),

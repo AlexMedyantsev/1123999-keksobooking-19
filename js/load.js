@@ -38,11 +38,9 @@
     xhr.addEventListener('load', function () {
       switch (xhr.status) {
         case 200:
-          // eslint-disable-next-line no-unused-expressions
           window.form.disableAll();
           break;
         case 500:
-          // eslint-disable-next-line no-unused-expressions
           window.form.showErrorMessage();
           break;
       }

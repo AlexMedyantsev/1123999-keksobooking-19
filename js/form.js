@@ -170,7 +170,7 @@
 
     document.addEventListener('click', removeSuccessMessage);
     document.addEventListener('keydown', function (evt) {
-      if (evt.keyCode === 27) {
+      if (evt.keyCode === window.constants.ESC_KEYCODE) {
         removeSuccessMessage();
       }
     });
@@ -189,7 +189,7 @@
 
     document.addEventListener('click', removeErrorMessage);
     document.addEventListener('keydown', function (evt) {
-      if (evt.keyCode === 27) {
+      if (evt.keyCode === window.constants.ESC_KEYCODE) {
         removeErrorMessage();
       }
     });
