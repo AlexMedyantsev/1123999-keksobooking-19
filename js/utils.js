@@ -1,5 +1,5 @@
 'use strict';
-// Модуль util.js
+
 (function () {
   var getRandomInteger = function (min, max) {
     return Math.floor(Math.random() * (max - min)) + min;

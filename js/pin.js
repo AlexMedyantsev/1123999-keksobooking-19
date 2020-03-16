@@ -108,8 +108,17 @@
 
   var onPinDataLoadError = function () {
     // eslint-disable-next-line no-console
-    console.log('Error 2');
+    console.log('Error');
   };
+
+  var onMainPinClick = function () {
+    window.constants.MAIN_MAP_PIN.addEventListener('click', function handler() {
+      window.load(window.pin.onDataLoaded, window.pin.onDataLoadError);
+      window.constants.MAIN_MAP_PIN.removeEventListener('click', handler);
+    });
+  };
+
+  onMainPinClick();
 
   var removeAllPins = function () {
     var allMapPins = document.querySelectorAll('.map__pin:not(.map__pin--main)');
@@ -125,5 +134,6 @@
     onDataLoaded: onPinDataLoaded,
     onDataLoadError: onPinDataLoadError,
     removeAll: removeAllPins,
+    onMainClick: onMainPinClick,
   };
 })();
