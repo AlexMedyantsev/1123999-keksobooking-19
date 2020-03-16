@@ -106,11 +106,6 @@
     renderAllMapPins(ArrayWithOffer);
   };
 
-  var onPinDataLoadError = function () {
-    // eslint-disable-next-line no-console
-    console.log('Error');
-  };
-
   var onMainPinClick = function () {
     window.constants.MAIN_MAP_PIN.addEventListener('click', function handler() {
       window.server.loadData(window.pin.onDataLoaded, window.pin.onDataLoadError);
@@ -132,7 +127,6 @@
     render: renderAllMapPins,
     setHandlers: setPinHandlers,
     onDataLoaded: onPinDataLoaded,
-    onDataLoadError: onPinDataLoadError,
     removeAll: removeAllPins,
     onMainClick: onMainPinClick,
   };
