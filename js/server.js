@@ -7,8 +7,6 @@
 
   window.server = {
     loadData: function (onSuccess, onError) {
-      
-
       xhr.responseType = 'json';
 
       xhr.addEventListener('load', function () {

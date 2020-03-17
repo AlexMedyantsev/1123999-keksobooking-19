@@ -1,10 +1,10 @@
 'use strict';
 
 (function () {
-  var MainPinLeftOffset = 34;
-  var MainPinRightOffset = 32;
-  var mainPinAccessedAreaTop = 64;
-  var mainPinAccessedAreaBottom = 565;
+  var MAIN_PIN_LEFT_OFFSET = 34;
+  var MAIN_PIN_RIGHT_OFFSET = 32;
+  var MAIN_PIN_ACCESSED_AREA_BOTTOM = 64;
+  var MAIN_PIN_ACCESSED_AREA_TOP = 565;
 
   var generateMapPin = function (pinData) {
     var mapPinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
@@ -73,7 +73,7 @@
       var currentX = window.constants.MAIN_MAP_PIN.offsetLeft - shift.x;
       var currentY = window.constants.MAIN_MAP_PIN.offsetTop - shift.y;
 
-      if (currentX > 0 - MainPinLeftOffset && currentX <= window.constants.MAP.offsetWidth - MainPinRightOffset && currentY > mainPinAccessedAreaTop && currentY <= mainPinAccessedAreaBottom) {
+      if (currentX > 0 - MAIN_PIN_LEFT_OFFSET && currentX <= window.constants.MAP.offsetWidth - MAIN_PIN_RIGHT_OFFSET && currentY > MAIN_PIN_ACCESSED_AREA_BOTTOM && currentY <= MAIN_PIN_ACCESSED_AREA_TOP) {
         window.constants.MAIN_MAP_PIN.style.top = (window.constants.MAIN_MAP_PIN.offsetTop - shift.y) + 'px';
         window.constants.MAIN_MAP_PIN.style.left = (window.constants.MAIN_MAP_PIN.offsetLeft - shift.x) + 'px';
         window.utils.writeLocationInInput({
