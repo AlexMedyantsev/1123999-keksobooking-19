@@ -12,8 +12,8 @@
 
     mapPinElement.style.left = pinData.location.x - window.constants.MAP_PIN_WIDTH / 2 + 'px';
     mapPinElement.style.top = pinData.location.y - window.constants.MAP_PIN_HEIGHT + 'px';
-    mapPinElement.querySelector('img').src = pinData.author.avatar;
-    mapPinElement.querySelector('img').alt = pinData.offer.title;
+    mapPinElement.querySelector('img').setAttribute('src', pinData.author.avatar);
+    mapPinElement.querySelector('img').setAttribute('alt', pinData.offer.title);
 
     return mapPinElement;
   };
