@@ -7,19 +7,19 @@
            priceCheck(pin) &&
            roomsAmountCheck(pin) &&
            guestsAmountCheck(pin) &&
-           featureCheck(window.constants.MAP_FILTER_WIFI, pin) &&
-           featureCheck(window.constants.MAP_FILTER_DISHWASHER, pin) &&
-           featureCheck(window.constants.MAP_FILTER_PARKING, pin) &&
-           featureCheck(window.constants.MAP_FILTER_WASHER, pin) &&
-           featureCheck(window.constants.MAP_FILTER_ELEVATOR, pin) &&
-           featureCheck(window.constants.MAP_FILTER_CONDITIONER, pin);
+           featureCheck(window.constants.mapFilterWifi, pin) &&
+           featureCheck(window.constants.mapFilterDishwasher, pin) &&
+           featureCheck(window.constants.mapFilterParking, pin) &&
+           featureCheck(window.constants.mapFilterWasher, pin) &&
+           featureCheck(window.constants.mapFilterElevator, pin) &&
+           featureCheck(window.constants.mapFilterConditioner, pin);
   };
 
   var houseTypeCheck = function (pin) {
-    if (window.constants.MAP_FILTER_HOUSE_TYPE.value === 'any') {
+    if (window.constants.mapFilterHouseType.value === 'any') {
       return pin;
     }
-    return pin.offer.type === window.constants.MAP_FILTER_HOUSE_TYPE.value;
+    return pin.offer.type === window.constants.mapFilterHouseType.value;
   };
 
   var updatePins = function () {
@@ -28,7 +28,7 @@
   };
 
   var priceCheck = function (pin) {
-    switch (window.constants.MAP_FILTER_PRICE.value) {
+    switch (window.constants.mapFilterPrice.value) {
       case 'any':
         return pin;
       case 'middle':
@@ -43,7 +43,7 @@
   };
 
   var roomsAmountCheck = function (pin) {
-    switch (window.constants.MAP_FILTER_ROOMS.value) {
+    switch (window.constants.mapFilterRooms.value) {
       case 'any':
         return pin;
       case '1':
@@ -58,7 +58,7 @@
   };
 
   var guestsAmountCheck = function (pin) {
-    switch (window.constants.MAP_FILTER_GUESTS.value) {
+    switch (window.constants.mapFilterGuests.value) {
       case 'any':
         return pin;
       case '0':

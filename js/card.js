@@ -37,7 +37,7 @@
     }
   };
   var generateOneMapCard = function (pinData) {
-    var mapCardElement = window.constants.MAP_CARD_TEMPLATE.cloneNode(true);
+    var mapCardElement = window.constants.mapCardTemplate.cloneNode(true);
 
     var mapCardTitle = mapCardElement.querySelector('.popup__title');
     var mapCardAddress = mapCardElement.querySelector('.popup__text--address');
@@ -94,7 +94,7 @@
 
   var renderMapCard = function (card) {
     card.classList.remove('hidden');
-    window.constants.MAP_PINS.appendChild(card);
+    window.constants.mapPins.appendChild(card);
   };
 
   var openCard = function (pinData) {
@@ -113,7 +113,7 @@
   };
 
   var removeRenderedCard = function () {
-    var mapCard = window.constants.MAP.querySelector('.map__card');
+    var mapCard = window.constants.map.querySelector('.map__card');
     if (mapCard) {
       mapCard.remove();
       document.removeEventListener('keydown', onEscapePress);
