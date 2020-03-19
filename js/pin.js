@@ -103,10 +103,7 @@
     document.addEventListener('mouseup', onMouseUp);
   });
 
-  var onPinDataLoaded = function (pins) {
-    var offers = pins.filter(function (element) {
-      return element.offer;
-    });
+  var onPinDataLoaded = function (offers) {
     window.data.set(offers);
     renderAllMapPins(offers);
   };

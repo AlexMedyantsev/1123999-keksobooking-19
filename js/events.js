@@ -44,7 +44,7 @@
   window.constants.adForm.addEventListener('submit', function (evt) {
     evt.preventDefault();
     window.server.sendData(window.form.getData());
-    window.constants.mainMapPin.addEventListener('click', window.pin.onMainClick);
     window.constants.mapFiltersForm.reset();
+    window.constants.mainMapPin.addEventListener('click', window.pin.onMainClick);
   });
 })();

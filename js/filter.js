@@ -2,7 +2,7 @@
 
 (function () {
 
-  var filterPins = function (pin) {
+  var checkPin = function (pin) {
     return houseTypeCheck(pin) &&
       priceCheck(pin) &&
       roomsAmountCheck(pin) &&
@@ -22,22 +22,23 @@
     return pin.offer.type === window.constants.mapFilterHouseType.value;
   };
 
-  var myFilter = function (pins) {
-    var filtered = [];
-    for (var i = 0; i < pins.length; i++) {
-      if (filtered.length === 5) {
+  var filterPins = function (array, filterFunction) {
+    var filteredPins = [];
+    for (var i = 0; i < array.length; i++) {
+      var result = filterFunction(array[i]);
+      if (filteredPins.length === 5) {
         break;
       }
-      if (pins[i]) {
-        filtered.push(pins[i]);
+      if (result) {
+        filteredPins.push(array[i]);
       }
     }
-    return filtered;
+    return filteredPins;
   };
 
   var updatePins = function () {
-    var filteredPins = window.data.get().myFilter(filterPins);
-    window.pin.render(filteredPins);
+    var resultFilteredPins = filterPins(window.data.get(), checkPin);
+    window.pin.render(resultFilteredPins);
   };
 
   var priceCheck = function (pin) {
@@ -96,5 +97,6 @@
 
   window.filter = {
     updatePins: updatePins,
+    pins: filterPins,
   };
-}) ();
+})();
