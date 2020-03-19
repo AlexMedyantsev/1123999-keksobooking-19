@@ -5,12 +5,22 @@
   var LOAD_URL = 'https://js.dump.academy/keksobooking/data';
   var GET_URL = 'https://js.dump.academy/keksobooking';
 
+  var statusCode = {
+    OK: 200,
+    BAD_REQUEST: 400,
+    UNAUTHORIZED: 401,
+    NOT_FOUND: 404,
+    INTERNAL_SERVER_ERROR: 500,
+    NOT_IMPLEMENTED: 501,
+    BAD_GATEWAY: 502,
+    SERVICE_UNAVAILABLE: 503,
+  };
+
   window.server = {
     loadData: function (onSuccess, onError) {
-      xhr.responseType = 'json';
 
       xhr.addEventListener('load', function () {
-        if (xhr.status === 200) {
+        if (xhr.status === statusCode.OK) {
           onSuccess(xhr.response);
         } else {
           onError('Cтатус ответа: ' + xhr.status + ' ' + xhr.statusText);
@@ -25,28 +35,30 @@
         onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
       });
 
-      xhr.timeout = 10000; // 10s
+      xhr.timeout = 10000;
 
       xhr.open('GET', LOAD_URL);
+      xhr.responseType = 'json';
       xhr.send();
     },
 
     sendData: function (data) {
-      xhr.responseType = 'json';
-
       xhr.addEventListener('load', function () {
         switch (xhr.status) {
-          case 200:
+          case statusCode.OK:
             window.form.disableAll();
             break;
-          case 500:
+          case statusCode.INTERNAL_SERVER_ERROR:
+            window.form.showErrorMessage();
+            break;
+          default:
             window.form.showErrorMessage();
             break;
         }
       });
 
       xhr.open('POST', GET_URL);
-
+      xhr.responseType = 'json';
       xhr.send(data);
     },
   };

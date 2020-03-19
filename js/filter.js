@@ -4,15 +4,15 @@
 
   var filterPins = function (pin) {
     return houseTypeCheck(pin) &&
-           priceCheck(pin) &&
-           roomsAmountCheck(pin) &&
-           guestsAmountCheck(pin) &&
-           featureCheck(window.constants.mapFilterWifi, pin) &&
-           featureCheck(window.constants.mapFilterDishwasher, pin) &&
-           featureCheck(window.constants.mapFilterParking, pin) &&
-           featureCheck(window.constants.mapFilterWasher, pin) &&
-           featureCheck(window.constants.mapFilterElevator, pin) &&
-           featureCheck(window.constants.mapFilterConditioner, pin);
+      priceCheck(pin) &&
+      roomsAmountCheck(pin) &&
+      guestsAmountCheck(pin) &&
+      featureCheck(window.constants.mapFilterWifi, pin) &&
+      featureCheck(window.constants.mapFilterDishwasher, pin) &&
+      featureCheck(window.constants.mapFilterParking, pin) &&
+      featureCheck(window.constants.mapFilterWasher, pin) &&
+      featureCheck(window.constants.mapFilterElevator, pin) &&
+      featureCheck(window.constants.mapFilterConditioner, pin);
   };
 
   var houseTypeCheck = function (pin) {
@@ -22,8 +22,21 @@
     return pin.offer.type === window.constants.mapFilterHouseType.value;
   };
 
+  var myFilter = function (pins) {
+    var filtered = [];
+    for (var i = 0; i < pins.length; i++) {
+      if (filtered.length === 5) {
+        break;
+      }
+      if (pins[i]) {
+        filtered.push(pins[i]);
+      }
+    }
+    return filtered;
+  };
+
   var updatePins = function () {
-    var filteredPins = window.data.get().filter(filterPins);
+    var filteredPins = window.data.get().myFilter(filterPins);
     window.pin.render(filteredPins);
   };
 
@@ -84,4 +97,4 @@
   window.filter = {
     updatePins: updatePins,
   };
-})();
+}) ();

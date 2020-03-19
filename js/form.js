@@ -189,6 +189,28 @@
         removeErrorMessage();
       }
     });
+    // Навесит  обработчик на кнопку
+  };
+
+  var showLoadDataError = function (text) {
+    var errorMessage = document.querySelector('#error').content.querySelector('.error');
+    var errorMessageTemplate = errorMessage.cloneNode(true);
+    errorMessageTemplate.querySelector('.error__button').remove();
+    errorMessageTemplate.querySelector('.error__message').textContent = text;
+    window.constants.main.appendChild(errorMessageTemplate);
+
+    var removeErrorMessage = function () {
+      window.utils.removeElement(errorMessageTemplate);
+      document.removeEventListener('click', removeErrorMessage);
+      document.removeEventListener('keydown', removeErrorMessage);
+    };
+
+    document.addEventListener('click', removeErrorMessage);
+    document.addEventListener('keydown', function (evt) {
+      if (evt.keyCode === window.constants.ESC_KEYCODE) {
+        removeErrorMessage();
+      }
+    });
   };
 
   var disableAll = function () {
@@ -212,6 +234,7 @@
     resetAll: resetAll,
     showSuccessMessage: showSuccessMessage,
     showErrorMessage: showErrorMessage,
+    showLoadDataError: showLoadDataError,
     disableAll: disableAll,
     disableAllNoMessage: disableAllNoMessage,
   };

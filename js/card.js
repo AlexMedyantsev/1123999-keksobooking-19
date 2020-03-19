@@ -114,9 +114,14 @@
 
   var removeRenderedCard = function () {
     var mapCard = window.constants.map.querySelector('.map__card');
+    var mapPinsList = document.querySelectorAll('.map__pin');
+
     if (mapCard) {
       mapCard.remove();
       document.removeEventListener('keydown', onEscapePress);
+      mapPinsList.forEach(function (element) {
+        element.classList.remove('map__pin--active');
+      });
     }
   };
 

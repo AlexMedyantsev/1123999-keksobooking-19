@@ -33,8 +33,9 @@
   };
 
   var setPinHandlers = function (pin, pinData, handler) {
+    var mapPinsList = document.querySelectorAll('.map__pin');
+
     pin.addEventListener('click', function () {
-      var mapPinsList = document.querySelectorAll('.map__pin');
       mapPinsList.forEach(function (element) {
         element.classList.remove('map__pin--active');
       });
@@ -42,7 +43,12 @@
       handler(pinData);
     });
     pin.addEventListener('keydown', function (evt) {
-      if (evt.keyCode === 13) {
+      if (evt.keyCode === window.constants.ENTER_KEYCODE) {
+        mapPinsList = document.querySelectorAll('.map__pin.map__pin--active');
+        mapPinsList.forEach(function (element) {
+          element.classList.remove('map__pin--active');
+        });
+        pin.classList.add('map__pin--active');
         handler(pinData);
       }
     });
@@ -98,7 +104,6 @@
   });
 
   var onPinDataLoaded = function (pins) {
-    window.form.activate();
     var offers = pins.filter(function (element) {
       return element.offer;
     });
@@ -107,14 +112,12 @@
   };
 
   var onMainPinClick = function () {
-    window.constants.mainMapPin.addEventListener('click', function handler() {
-      window.server.loadData(window.pin.onDataLoaded, function () {
-      });
-      window.constants.mainMapPin.removeEventListener('click', handler);
-    });
+    window.form.activate();
+    window.server.loadData(window.pin.onDataLoaded, window.form.showLoadDataError);
+    window.constants.mainMapPin.removeEventListener('click', onMainPinClick);
   };
 
-  onMainPinClick();
+  window.constants.mainMapPin.addEventListener('click', onMainPinClick);
 
   var removeAllPins = function () {
     var allMapPins = document.querySelectorAll('.map__pin:not(.map__pin--main)');

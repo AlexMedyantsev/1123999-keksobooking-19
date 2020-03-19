@@ -11,6 +11,7 @@
     map: document.querySelector('.map'),
     mapCardTemplate: document.querySelector('#card').content.querySelector('.map__card'),
     mapPins: document.querySelector('.map__pins'),
+    mapPinsList: document.querySelector('.map__pin'),
     mainMapPin: document.querySelector('.map__pin--main'),
     mapFiltersForm: document.querySelector('.map__filters'),
     mapFilterHouseType: document.querySelector('#housing-type'),

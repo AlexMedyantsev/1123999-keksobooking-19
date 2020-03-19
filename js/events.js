@@ -9,7 +9,6 @@
 
   formSubmitButton.addEventListener('click', function () {
     window.form.validate();
-    window.pin.onMainClick();
   });
 
   placeInput.addEventListener('change', function () {
@@ -29,10 +28,9 @@
     evt.preventDefault();
     window.constants.mapFiltersForm.reset();
     window.utils.writeLocationInInput(window.utils.getElementLocation(window.constants.mainMapPin), window.constants.addressInput);
-    window.pin.onMainClick();
+    window.constants.mainMapPin.addEventListener('click', window.pin.onMainClick);
     window.card.remove();
     window.form.syncPlaceTypeAndMinPrice(placeInput, priceInput);
-
   });
 
   window.constants.mapFiltersForm.addEventListener('change', function () {
@@ -46,6 +44,7 @@
   window.constants.adForm.addEventListener('submit', function (evt) {
     evt.preventDefault();
     window.server.sendData(window.form.getData());
+    window.constants.mainMapPin.addEventListener('click', window.pin.onMainClick);
     window.constants.mapFiltersForm.reset();
   });
 })();
