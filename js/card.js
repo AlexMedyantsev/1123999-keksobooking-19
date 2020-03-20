@@ -99,7 +99,6 @@
 
   var openCard = function (pinData) {
     var mapCard = generateOneMapCard(pinData);
-    removeRenderedCard();
     renderMapCard(mapCard);
     var closeButton = mapCard.querySelector('.popup__close');
     closeButton.addEventListener('click', removeRenderedCard);

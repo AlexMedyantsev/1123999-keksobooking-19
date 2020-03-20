@@ -39,16 +39,10 @@
     sendData: function (data) {
       var xhr = new XMLHttpRequest();
       xhr.addEventListener('load', function () {
-        switch (xhr.status) {
-          case statusCode.OK:
-            window.form.disableAll();
-            break;
-          case statusCode.INTERNAL_SERVER_ERROR:
-            window.form.showErrorMessage();
-            break;
-          default:
-            window.form.showErrorMessage();
-            break;
+        if (xhr.status === statusCode.OK) {
+          window.form.disableAll();
+        } else {
+          window.form.showErrorMessage();
         }
       });
 

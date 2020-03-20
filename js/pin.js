@@ -33,18 +33,21 @@
   };
 
   var setPinHandlers = function (pin, pinData, handler) {
-    var mapPinsList = document.querySelectorAll('.map__pin');
 
     pin.addEventListener('click', function () {
+      window.card.remove();
+      var mapPinsList = document.querySelectorAll('.map__pin.map__pin--active');
       mapPinsList.forEach(function (element) {
         element.classList.remove('map__pin--active');
       });
       pin.classList.add('map__pin--active');
       handler(pinData);
     });
+
     pin.addEventListener('keydown', function (evt) {
       if (evt.keyCode === window.constants.ENTER_KEYCODE) {
-        mapPinsList = document.querySelectorAll('.map__pin.map__pin--active');
+        var mapPinsList = document.querySelectorAll('.map__pin.map__pin--active');
+        window.card.remove();
         mapPinsList.forEach(function (element) {
           element.classList.remove('map__pin--active');
         });
@@ -105,7 +108,7 @@
 
   var onPinDataLoaded = function (offers) {
     window.data.set(offers);
-    renderAllMapPins(offers);
+    window.filter.updatePins(offers);
   };
 
   var onMainPinClick = function (evt) {

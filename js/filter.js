@@ -36,8 +36,8 @@
     return filteredPins;
   };
 
-  var updatePins = function () {
-    var resultFilteredPins = filterPins(window.data.get(), checkPin);
+  var updatePins = function (offers) {
+    var resultFilteredPins = filterPins(offers, checkPin);
     window.pin.render(resultFilteredPins);
   };
 
