@@ -93,8 +93,8 @@
     }
   };
 
-  var validateTitleInput = function (element) {
-    window.utils.setInputRequired(element);
+  var validateTitleInput = function (input) {
+    window.utils.setInputRequired(input);
     var title = titleInput.value;
     if (title.length < 30) {
       titleInput.setCustomValidity('Минимум 30 символов');
