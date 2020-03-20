@@ -1,23 +1,17 @@
 'use strict';
 
 (function () {
-  var xhr = new XMLHttpRequest();
   var LOAD_URL = 'https://js.dump.academy/keksobooking/data';
-  var GET_URL = 'https://js.dump.academy/keksobooking';
+  var GET_URL = 'https://js.dump.academy/keksobooking1';
 
   var statusCode = {
     OK: 200,
-    BAD_REQUEST: 400,
-    UNAUTHORIZED: 401,
-    NOT_FOUND: 404,
     INTERNAL_SERVER_ERROR: 500,
-    NOT_IMPLEMENTED: 501,
-    BAD_GATEWAY: 502,
-    SERVICE_UNAVAILABLE: 503,
   };
 
   window.server = {
     loadData: function (onSuccess, onError) {
+      var xhr = new XMLHttpRequest();
 
       xhr.addEventListener('load', function () {
         if (xhr.status === statusCode.OK) {
@@ -43,6 +37,7 @@
     },
 
     sendData: function (data) {
+      var xhr = new XMLHttpRequest();
       xhr.addEventListener('load', function () {
         switch (xhr.status) {
           case statusCode.OK:

@@ -164,32 +164,38 @@
       document.removeEventListener('keydown', removeSuccessMessage);
     };
 
-    document.addEventListener('click', removeSuccessMessage);
-    document.addEventListener('keydown', function (evt) {
+    var onEscPressed = function (evt) {
       if (evt.keyCode === window.constants.ESC_KEYCODE) {
         removeSuccessMessage();
       }
-    });
+    };
+
+    document.addEventListener('click', removeSuccessMessage);
+    document.addEventListener('keydown', onEscPressed);
   };
 
   var showErrorMessage = function () {
     var errorMessage = document.querySelector('#error').content.querySelector('.error');
     var errorMessageTemplate = errorMessage.cloneNode(true);
+    var errorMessageButton = errorMessageTemplate.querySelector('.error__button');
     window.constants.main.appendChild(errorMessageTemplate);
 
     var removeErrorMessage = function () {
       window.utils.removeElement(errorMessageTemplate);
       document.removeEventListener('click', removeErrorMessage);
+      errorMessageButton.addEventListener('click', errorMessageButton);
       document.removeEventListener('keydown', removeErrorMessage);
     };
 
-    document.addEventListener('click', removeErrorMessage);
-    document.addEventListener('keydown', function (evt) {
+    var onEscPressed = function (evt) {
       if (evt.keyCode === window.constants.ESC_KEYCODE) {
         removeErrorMessage();
       }
-    });
-    // Навесит  обработчик на кнопку
+    };
+
+    document.addEventListener('click', removeErrorMessage);
+    errorMessageButton.addEventListener('click', removeErrorMessage);
+    document.addEventListener('keydown', onEscPressed);
   };
 
   var showLoadDataError = function (text) {
@@ -205,12 +211,14 @@
       document.removeEventListener('keydown', removeErrorMessage);
     };
 
-    document.addEventListener('click', removeErrorMessage);
-    document.addEventListener('keydown', function (evt) {
+    var onEscPressed = function (evt) {
       if (evt.keyCode === window.constants.ESC_KEYCODE) {
         removeErrorMessage();
       }
-    });
+    };
+
+    document.addEventListener('click', removeErrorMessage);
+    document.addEventListener('keydown', onEscPressed);
   };
 
   var disableAll = function () {

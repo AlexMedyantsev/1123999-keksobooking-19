@@ -108,10 +108,17 @@
     renderAllMapPins(offers);
   };
 
-  var onMainPinClick = function () {
+  var onMainPinClick = function (evt) {
+    evt.stopPropagation();
     window.form.activate();
     window.server.loadData(window.pin.onDataLoaded, window.form.showLoadDataError);
     window.constants.mainMapPin.removeEventListener('click', onMainPinClick);
+  };
+
+  var onMainPinClickAfterSubmit = function () {
+    window.form.activate();
+    renderAllMapPins(window.data.get());
+    window.constants.mainMapPin.removeEventListener('click', onMainPinClickAfterSubmit);
   };
 
   window.constants.mainMapPin.addEventListener('click', onMainPinClick);
@@ -130,5 +137,6 @@
     onDataLoaded: onPinDataLoaded,
     removeAll: removeAllPins,
     onMainClick: onMainPinClick,
+    onMainClickAfterSubmit: onMainPinClickAfterSubmit,
   };
 })();

@@ -22,10 +22,10 @@
     return pin.offer.type === window.constants.mapFilterHouseType.value;
   };
 
-  var filterPins = function (array, filterFunction) {
+  var filterPins = function (array, callback) {
     var filteredPins = [];
     for (var i = 0; i < array.length; i++) {
-      var result = filterFunction(array[i]);
+      var result = callback(array[i]);
       if (filteredPins.length === 5) {
         break;
       }

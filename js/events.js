@@ -28,7 +28,7 @@
     evt.preventDefault();
     window.constants.mapFiltersForm.reset();
     window.utils.writeLocationInInput(window.utils.getElementLocation(window.constants.mainMapPin), window.constants.addressInput);
-    window.constants.mainMapPin.addEventListener('click', window.pin.onMainClick);
+    window.constants.mainMapPin.addEventListener('click', window.pin.onMainClickAfterSubmit);
     window.card.remove();
     window.form.syncPlaceTypeAndMinPrice(placeInput, priceInput);
   });
@@ -44,7 +44,7 @@
   window.constants.adForm.addEventListener('submit', function (evt) {
     evt.preventDefault();
     window.server.sendData(window.form.getData());
+    window.constants.mainMapPin.addEventListener('click', window.pin.onMainClickAfterSubmit);
     window.constants.mapFiltersForm.reset();
-    window.constants.mainMapPin.addEventListener('click', window.pin.onMainClick);
   });
 })();
