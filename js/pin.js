@@ -108,7 +108,7 @@
 
   var onPinDataLoaded = function (offers) {
     window.data.set(offers);
-    window.filter.updatePins(offers);
+    renderAllMapPins(offers);
   };
 
   var onMainPinClick = function (evt) {
