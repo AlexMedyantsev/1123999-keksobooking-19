@@ -6,7 +6,6 @@
 
   var statusCode = {
     OK: 200,
-    INTERNAL_SERVER_ERROR: 500,
   };
 
   window.server = {
