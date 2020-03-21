@@ -7,6 +7,7 @@
     MAP_PIN_HEIGHT: 70,
     ENTER_KEYCODE: 13,
     ESC_KEYCODE: 27,
+    STATUS_CODE_OK: 200,
     main: document.querySelector('main'),
     map: document.querySelector('.map'),
     mapCardTemplate: document.querySelector('#card').content.querySelector('.map__card'),

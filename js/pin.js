@@ -114,7 +114,7 @@
   var onMainPinClick = function (evt) {
     evt.stopPropagation();
     window.form.activate();
-    window.server.loadData(window.pin.onDataLoaded, window.form.showLoadDataError);
+    window.loadData(window.pin.onDataLoaded, window.form.showLoadDataError);
     window.constants.mainMapPin.removeEventListener('click', onMainPinClick);
   };
 

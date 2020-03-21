@@ -43,7 +43,7 @@
 
   window.constants.adForm.addEventListener('submit', function (evt) {
     evt.preventDefault();
-    window.server.sendData(window.form.getData());
+    window.sendData(window.form.getData());
     window.constants.mainMapPin.addEventListener('click', window.pin.onMainClickAfterSubmit);
     window.constants.mapFiltersForm.reset();
   });

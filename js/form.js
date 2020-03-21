@@ -223,6 +223,7 @@
 
   var disableAll = function () {
     disableForm(window.constants.adForm);
+    window.card.remove();
     resetAll();
     showSuccessMessage();
   };
