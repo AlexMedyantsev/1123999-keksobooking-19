@@ -109,22 +109,23 @@
   var onPinDataLoaded = function (offers) {
     window.data.set(offers);
     renderAllMapPins(offers);
+    window.form.setState(window.constants.mapFiltersForm, false);
   };
 
   var onMainPinClick = function (evt) {
     evt.stopPropagation();
-    window.form.activate();
     window.loadData(window.pin.onDataLoaded, window.form.showLoadDataError);
-    window.constants.mainMapPin.removeEventListener('click', onMainPinClick);
+    window.form.activate();
+    window.constants.mainMapPin.removeEventListener('mousedown', onMainPinClick);
   };
 
   var onMainPinClickAfterSubmit = function () {
     window.form.activate();
     renderAllMapPins(window.data.get());
-    window.constants.mainMapPin.removeEventListener('click', onMainPinClickAfterSubmit);
+    window.constants.mainMapPin.removeEventListener('mousedown', onMainPinClickAfterSubmit);
   };
 
-  window.constants.mainMapPin.addEventListener('click', onMainPinClick);
+  window.constants.mainMapPin.addEventListener('mousedown', onMainPinClick);
 
   var removeAllPins = function () {
     var allMapPins = document.querySelectorAll('.map__pin:not(.map__pin--main)');

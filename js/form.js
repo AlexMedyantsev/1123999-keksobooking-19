@@ -13,20 +13,11 @@
     return formData;
   };
 
-  var disableForm = function (form) {
+  var setFormState = function (form, boolean) {
     var formElements = form.elements;
 
     for (var i = 0; i < form.length; i++) {
-      formElements[i].disabled = true;
-
-    }
-  };
-
-  var enableForm = function (form) {
-    var formElements = form.elements;
-
-    for (var i = 0; i < form.length; i++) {
-      formElements[i].disabled = false;
+      formElements[i].disabled = boolean;
     }
   };
 
@@ -56,10 +47,8 @@
     window.utils.setElementPosition(window.constants.mainMapPin, mainMapPinInitialPosition);
   };
 
-
-  // Действия которые выполняются по дефолту
-  disableForm(window.constants.mapFiltersForm);
-  disableForm(window.constants.adForm);
+  setFormState(window.constants.mapFiltersForm, true);
+  setFormState(window.constants.adForm, true);
   window.utils.makeInputReadOnly(addressInput);
   window.utils.writeLocationInInput(window.utils.getElementLocation(window.constants.mainMapPin), addressInput);
 
@@ -67,8 +56,7 @@
 
 
   var activatePage = function () {
-    enableForm(window.constants.adForm);
-    enableForm(window.constants.mapFiltersForm);
+    setFormState(window.constants.adForm, false);
     fadeInMap();
     fadeInForm();
     window.utils.writeLocationInInput(window.utils.getElementMiddleBottomPosition(window.constants.mainMapPin), addressInput);
@@ -222,21 +210,21 @@
   };
 
   var disableAll = function () {
-    disableForm(window.constants.adForm);
+    setFormState(window.constants.adForm, true);
     window.card.remove();
     resetAll();
     showSuccessMessage();
   };
 
   var disableAllNoMessage = function () {
-    disableForm(window.constants.adForm);
+    setFormState(window.constants.adForm, true);
     resetAll();
   };
 
   window.form = {
     activate: activatePage,
-    disable: disableForm,
     validate: validateForm,
+    setState: setFormState,
     syncCheckinAndCheckout: syncCheckinAndCheckout,
     syncPlaceTypeAndMinPrice: syncPlaceTypeAndMinPrice,
     getData: getFormData,
