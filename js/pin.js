@@ -114,8 +114,8 @@
 
   var onMainPinClick = function (evt) {
     evt.stopPropagation();
-    window.loadData(window.pin.onDataLoaded, window.form.showLoadDataError);
     window.form.activate();
+    window.loadData(window.pin.onDataLoaded, window.form.showLoadDataError);
     window.constants.mainMapPin.removeEventListener('mousedown', onMainPinClick);
   };
 
