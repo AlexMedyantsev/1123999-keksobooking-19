@@ -16,10 +16,7 @@
   };
 
   var houseTypeCheck = function (pin) {
-    if (window.constants.mapFilterHouseType.value === 'any') {
-      return pin;
-    }
-    return pin.offer.type === window.constants.mapFilterHouseType.value;
+    return (window.constants.mapFilterHouseType.value === 'any') || (pin.offer.type === window.constants.mapFilterHouseType.value);
   };
 
   var filterPins = function (array, callback) {
@@ -87,11 +84,7 @@
   };
 
   var featureCheck = function (feature, pin) {
-    if (feature.checked) {
-      return pin.offer.features.includes(feature.value);
-    } else {
-      return pin;
-    }
+    return feature.checked ? pin.offer.features.includes(feature.value) : pin;
   };
 
 

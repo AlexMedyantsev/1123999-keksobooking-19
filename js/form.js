@@ -7,6 +7,11 @@
   var priceInput = window.constants.adForm.querySelector('#price');
   var placeInput = window.constants.adForm.querySelector('#type');
   var addressInput = window.constants.adForm.querySelector('#address');
+  var successMessage = document.querySelector('#success').content.querySelector('.success');
+  var successMessageTemplate = successMessage.cloneNode(true);
+  var errorMessage = document.querySelector('#error').content.querySelector('.error');
+  var errorMessageTemplate = errorMessage.cloneNode(true);
+  var errorMessageButton = errorMessageTemplate.querySelector('.error__button');
 
   var getFormData = function () {
     var formData = new FormData(window.constants.adForm);
@@ -142,8 +147,6 @@
   };
 
   var showSuccessMessage = function () {
-    var successMessage = document.querySelector('#success').content.querySelector('.success');
-    var successMessageTemplate = successMessage.cloneNode(true);
     window.constants.map.appendChild(successMessageTemplate);
 
     var removeSuccessMessage = function () {
@@ -163,9 +166,6 @@
   };
 
   var showErrorMessage = function () {
-    var errorMessage = document.querySelector('#error').content.querySelector('.error');
-    var errorMessageTemplate = errorMessage.cloneNode(true);
-    var errorMessageButton = errorMessageTemplate.querySelector('.error__button');
     window.constants.main.appendChild(errorMessageTemplate);
 
     var removeErrorMessage = function () {
@@ -187,14 +187,14 @@
   };
 
   var showLoadDataError = function (text) {
-    var errorMessage = document.querySelector('#error').content.querySelector('.error');
-    var errorMessageTemplate = errorMessage.cloneNode(true);
-    errorMessageTemplate.querySelector('.error__button').remove();
-    errorMessageTemplate.querySelector('.error__message').textContent = text;
-    window.constants.main.appendChild(errorMessageTemplate);
+    var errorLoadMessage = document.querySelector('#error').content.querySelector('.error');
+    var errorLoadMessageTemplate = errorLoadMessage.cloneNode(true);
+    errorLoadMessageTemplate.querySelector('.error__button').remove();
+    errorLoadMessageTemplate.querySelector('.error__message').textContent = text;
+    window.constants.main.appendChild(errorLoadMessageTemplate);
 
     var removeErrorMessage = function () {
-      window.utils.removeElement(errorMessageTemplate);
+      window.utils.removeElement(errorLoadMessageTemplate);
       document.removeEventListener('click', removeErrorMessage);
       document.removeEventListener('keydown', removeErrorMessage);
     };

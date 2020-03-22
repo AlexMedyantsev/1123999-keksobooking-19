@@ -22,6 +22,7 @@
     });
 
     xhr.timeout = 10000;
+
     xhr.open('POST', GET_URL);
     xhr.responseType = 'json';
     xhr.send(data);
